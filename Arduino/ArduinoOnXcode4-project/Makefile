@@ -2,6 +2,7 @@
 
 AVRDUDE_DIR = $(ARDUINO_APP_PATH)/Contents/Resources/Java/hardware/tools/avr/bin
 AVRDUDE_CONF= $(ARDUINO_APP_PATH)/Contents/Resources/Java/hardware/tools/avr/etc/avrdude.conf
+BIN_PATH = $(BUILD_DIR)
 SIZE = $(AVRDUDE_DIR)/avr-size
 SOURCES = $(wildcard src/*.cpp)
 
@@ -63,7 +64,7 @@ LDFLAGS = -lm -Wl,-gc-sections -mmcu=$(MCU)
 # Programming support using avrdude. Settings and variables.
 AVRDUDE_PROGRAMMER = stk500v1
 AVRDUDE_PORT = $(PORT)
-AVRDUDE_WRITE_FLASH = -U flash:w:bin/$(TARGET).hex
+AVRDUDE_WRITE_FLASH = -U flash:w:$(BIN_PATH)/$(TARGET).hex
 AVRDUDE_FLAGS = -F -p $(MCU) -P $(AVRDUDE_PORT) -c $(AVRDUDE_PROGRAMMER) \
   -b $(UPLOAD_RATE) -D
   
@@ -94,8 +95,8 @@ ALL_ASFLAGS = -mmcu=$(MCU) -I. -x assembler-with-cpp $(ASFLAGS)
 
 
 # Default target.
-all: clean build sizeafter upload
-	@echo "action = all";
+all: build sizeafter upload
+	@echo "action = default";
 
 
 build: info folder elf hex
@@ -103,11 +104,11 @@ build: info folder elf hex
 
 		
 
-elf: bin/$(TARGET).elf
-hex: bin/$(TARGET).hex
-eep: bin/$(TARGET).eep
-lss: bin/$(TARGET).lss 
-sym: bin/$(TARGET).sym
+elf: $(BIN_PATH)/$(TARGET).elf
+hex: $(BIN_PATH)/$(TARGET).hex
+eep: $(BIN_PATH)/$(TARGET).eep
+lss: $(BIN_PATH)/$(TARGET).lss 
+sym: $(BIN_PATH)/$(TARGET).sym
 
 
 # print info
@@ -123,25 +124,25 @@ info:
 	
 # create the bin folder if it doesn't exist
 folder:
-	mkdir -p bin
+	mkdir -p "$(BIN_PATH)"
 
 # Program the device.  
-upload: bin/$(TARGET).hex
+upload: $(BIN_PATH)/$(TARGET).hex
 	$(AVRDUDE) -C$(AVRDUDE_CONF) $(AVRDUDE_FLAGS) $(AVRDUDE_WRITE_FLASH)
     @echo "action = upload";
 
 
 # Display size of file.
-HEXSIZE = $(SIZE) --target=$(FORMAT) bin/$(TARGET).hex
-ELFSIZE = $(SIZE)  bin/$(TARGET).elf
+HEXSIZE = $(SIZE) --target=$(FORMAT) $(BIN_PATH)/$(TARGET).hex
+ELFSIZE = $(SIZE)  $(BIN_PATH)/$(TARGET).elf
 
 sizebefore:
 	@echo "size before: ";
-	@if [ -f bin/$(TARGET).elf ]; then echo; echo $(MSG_SIZE_BEFORE); $(HEXSIZE); echo; fi
+	@if [ -f $(BIN_PATH)/$(TARGET).elf ]; then echo; echo $(MSG_SIZE_BEFORE); $(HEXSIZE); echo; fi
 
 sizeafter:
 	@echo "size after:";
-	@if [ -f bin/$(TARGET).elf ]; then echo; echo $(MSG_SIZE_AFTER); $(HEXSIZE); echo; fi
+	@if [ -f $(BIN_PATH)/$(TARGET).elf ]; then echo; echo $(MSG_SIZE_AFTER); $(HEXSIZE); echo; fi
 
 
 
@@ -153,12 +154,12 @@ COFFCONVERT=$(OBJCOPY) --debugging \
 --change-section-address .eeprom-0x810000 
 
 
-coff: bin/$(TARGET).elf
-	$(COFFCONVERT) -O coff-avr bin/$(TARGET).elf $(TARGET).cof
+coff: $(BIN_PATH)/$(TARGET).elf
+	$(COFFCONVERT) -O coff-avr $(BIN_PATH)/$(TARGET).elf $(TARGET).cof
 
 
 extcoff: $(TARGET).elf
-	$(COFFCONVERT) -O coff-ext-avr bin/$(TARGET).elf $(TARGET).cof
+	$(COFFCONVERT) -O coff-ext-avr $(BIN_PATH)/$(TARGET).elf $(TARGET).cof
 
 
 .SUFFIXES: .elf .hex .eep .lss .sym
@@ -179,12 +180,12 @@ extcoff: $(TARGET).elf
 	$(NM) -n $< > $@
 
 
-bin/core.a: $(OBJ)
-	@for i in $(OBJ); do echo $(AR) rcs bin/core.a $$i; $(AR) rcs bin/core.a $$i; done
+$(BIN_PATH)/core.a: $(OBJ)
+	@for i in $(OBJ); do echo $(AR) rcs $(BIN_PATH)/core.a $$i; $(AR) rcs $(BIN_PATH)/core.a $$i; done
 
 # Link: create ELF output file from library.
-bin/$(TARGET).elf: bin/core.a
-	$(CC) $(ALL_CFLAGS) -o $@ src/$(TARGET).cpp -L. bin/core.a $(LDFLAGS)
+$(BIN_PATH)/$(TARGET).elf: $(BIN_PATH)/core.a
+	$(CC) $(ALL_CFLAGS) -o $@ src/$(TARGET).cpp -L. $(BIN_PATH)/core.a $(LDFLAGS)
 
 # Compile: create object files from C++ source files.
 .cpp.o:
@@ -208,8 +209,8 @@ bin/$(TARGET).elf: bin/core.a
 
 # Target: clean project.
 clean:
-	$(REMOVE) bin/*.o bin/*.a bin/$(TARGET).hex bin/$(TARGET).eep bin/$(TARGET).cof bin/$(TARGET).elf \
-	bin/$(TARGET).map bin/$(TARGET).sym bin/$(TARGET).lss bin/core.a \
+	$(REMOVE) $(BIN_PATH)/*.o $(BIN_PATH)/*.a $(BIN_PATH)/$(TARGET).hex $(BIN_PATH)/$(TARGET).eep $(BIN_PATH)/$(TARGET).cof $(BIN_PATH)/$(TARGET).elf \
+	$(BIN_PATH)/$(TARGET).map $(BIN_PATH)/$(TARGET).sym $(BIN_PATH)/$(TARGET).lss $(BIN_PATH)/core.a \
 	$(OBJ) $(LST) $(SRC:.c=.s) $(SRC:.c=.d) $(CXXSRC:.cpp=.s) $(CXXSRC:.cpp=.d)
 
 depend:

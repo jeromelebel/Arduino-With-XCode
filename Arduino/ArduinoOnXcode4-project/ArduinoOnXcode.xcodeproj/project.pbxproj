@@ -162,23 +162,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXLegacyTarget section */
-		19A5FEE8147578E500FAEAAB /* Build */ = {
-			isa = PBXLegacyTarget;
-			buildArgumentsString = build;
-			buildConfigurationList = 19A5FEEB147578E500FAEAAB /* Build configuration list for PBXLegacyTarget "Build" */;
-			buildPhases = (
-			);
-			buildToolPath = /usr/bin/make;
-			buildWorkingDirectory = "";
-			dependencies = (
-			);
-			name = Build;
-			passBuildSettingsInEnvironment = 1;
-			productName = ArduinoXCode4;
-		};
 		19A5FF0D14757BAC00FAEAAB /* Build and Upload */ = {
 			isa = PBXLegacyTarget;
-			buildArgumentsString = all;
+			buildArgumentsString = "$(ACTION)";
 			buildConfigurationList = 19A5FF0E14757BAC00FAEAAB /* Build configuration list for PBXLegacyTarget "Build and Upload" */;
 			buildPhases = (
 			);
@@ -189,20 +175,6 @@
 			name = "Build and Upload";
 			passBuildSettingsInEnvironment = 1;
 			productName = uploadArduinoXCode4;
-		};
-		2259D1A514C876480021B514 /* clean */ = {
-			isa = PBXLegacyTarget;
-			buildArgumentsString = clean;
-			buildConfigurationList = 2259D1A614C876480021B514 /* Build configuration list for PBXLegacyTarget "clean" */;
-			buildPhases = (
-			);
-			buildToolPath = /usr/bin/make;
-			buildWorkingDirectory = "";
-			dependencies = (
-			);
-			name = clean;
-			passBuildSettingsInEnvironment = 1;
-			productName = clean;
 		};
 /* End PBXLegacyTarget section */
 
@@ -244,9 +216,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				19A5FEE8147578E500FAEAAB /* Build */,
 				19A5FF0D14757BAC00FAEAAB /* Build and Upload */,
-				2259D1A514C876480021B514 /* clean */,
 				22FCDCB214C8F1830033ABF6 /* fake target */,
 			);
 		};
@@ -288,23 +258,7 @@
 			};
 			name = Release;
 		};
-		19A5FEED147578E500FAEAAB /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				OTHER_CFLAGS = "";
-				OTHER_LDFLAGS = "";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-			};
-			name = Release;
-		};
 		19A5FF1014757BAC00FAEAAB /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				PRODUCT_NAME = "$(TARGET_NAME)";
-			};
-			name = Release;
-		};
-		2259D1A714C876480021B514 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -330,26 +284,10 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		19A5FEEB147578E500FAEAAB /* Build configuration list for PBXLegacyTarget "Build" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				19A5FEED147578E500FAEAAB /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
 		19A5FF0E14757BAC00FAEAAB /* Build configuration list for PBXLegacyTarget "Build and Upload" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				19A5FF1014757BAC00FAEAAB /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		2259D1A614C876480021B514 /* Build configuration list for PBXLegacyTarget "clean" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				2259D1A714C876480021B514 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

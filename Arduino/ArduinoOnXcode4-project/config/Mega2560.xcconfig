@@ -3,12 +3,11 @@
 // Arduino Mega 2560
 
 BOARD = Arduino_Mega_2560
-DESCRIPTION = Arduino Mega with ATMega2560
+DESCRIPTION = Arduino Mega 2560 or Mega ADK
 MCU = atmega2560
 F_CPU = 16000000
 FORMAT = ihex
 UPLOAD_RATE = 115200
 PORT = /dev/tty.usbserial*
-
-
-
+ARDUINO_VARIANT = mega
+ARDUINO_CORE = arduino

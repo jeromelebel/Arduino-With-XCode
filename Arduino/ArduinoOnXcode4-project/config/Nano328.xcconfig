@@ -1,0 +1,7 @@
+// nano is the same as Duemilanove
+#include "Duemilanove328.xcconfig"
+
+BOARD = Arduino_Nano
+DESCRIPTION = Arduino Nano w/ ATmega328
+ARDUINO_VARIANT = eightanaloginputs
+ARDUINO_CORE = arduino

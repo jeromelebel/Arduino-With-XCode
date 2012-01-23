@@ -3,3 +3,6 @@
 #include "Diecimila168.xcconfig"
 
 BOARD = Arduino_Nano_168
+DESCRIPTION = Arduino Nano w/ ATmega168
+ARDUINO_VARIANT = eightanaloginputs
+ARDUINO_CORE = arduino

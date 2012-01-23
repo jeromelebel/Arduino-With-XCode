@@ -8,7 +8,7 @@ SOURCES = $(wildcard src/*.cpp)
 # add arduino app path to the paths..
 ARD_LIBRARIES = $(ARDUINO_LIBRARIES)
 ARD_LIBRARIES_PATH = $(ARDUINO_APP_PATH)$(ARDUINO_LIBRARIES_PATH)
-ARD_PATH = $(ARDUINO_APP_PATH)$(ARDUINO_PATH)
+ARD_CORE_PATH = $(ARDUINO_APP_PATH)$(ARDUINO_PATH)/cores/ARDUINO_CORE
 
 # make the correct paths for the libraries
 INCLUDE_LIBRARIES = $(addprefix -I$(ARD_LIBRARIES_PATH)/,$(ARD_LIBRARIES)) \
@@ -22,10 +22,10 @@ CPP_LIBRARIES += $(foreach item, $(LIBRARY_PATHS), $(wildcard $(item)/*.cpp))
 TARGET = main
 
 # find .c files in arduino directory
-SRC = $(wildcard $(ARD_PATH)/*.c)
+SRC = $(wildcard $(ARD_CORE_PATH)/*.c)
 
 # .cpp files from libraries and arduino directory
-CXXSRC = $(SOURCES) $(wildcard $(ARD_PATH)/*.cpp) $(CPP_LIBRARIES) 
+CXXSRC = $(SOURCES) $(wildcard $(ARD_CORE_PATH)/*.cpp) $(CPP_LIBRARIES) 
 
 
 # Name of this Makefile (used for "make depend").
@@ -43,8 +43,8 @@ CDEFS = -DF_CPU=$(F_CPU)
 CXXDEFS = -DF_CPU=$(F_CPU)
 
 # Place -I options here : include libraries
-CINCS = -I$(ARD_PATH) $(INCLUDE_LIBRARIES)
-CXXINCS = -I$(ARD_PATH) $(INCLUDE_LIBRARIES)
+CINCS = -I$(ARD_CORE_PATH) $(INCLUDE_LIBRARIES)
+CXXINCS = -I$(ARD_CORE_PATH) $(INCLUDE_LIBRARIES)
 
 # Compiler flag to set the C Standard level.
 # c89   - "ANSI" C

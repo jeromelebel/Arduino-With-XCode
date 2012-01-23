@@ -29,6 +29,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		02BCCD7D14CBDF280089223E /* arduino */ = {isa = PBXFileReference; lastKnownFileType = folder; name = arduino; path = /Applications/Arduino.app/Contents/Resources/Java/hardware/arduino/cores/arduino; sourceTree = "<absolute>"; };
 		19A5FF05147579A900FAEAAB /* Makefile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
 		19A5FF06147579A900FAEAAB /* README */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README; sourceTree = "<group>"; };
 		19A5FF0814757A6A00FAEAAB /* ArduinoProgram.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ArduinoProgram.cpp; sourceTree = "<group>"; };
@@ -36,31 +37,6 @@
 		19A5FF0A14757A6A00FAEAAB /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		19A5FF0B14757A6A00FAEAAB /* TestThing.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TestThing.cpp; sourceTree = "<group>"; };
 		19A5FF0C14757A6A00FAEAAB /* TestThing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestThing.h; sourceTree = "<group>"; };
-		2259D08A14C854960021B514 /* binary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = binary.h; sourceTree = "<group>"; };
-		2259D08B14C854960021B514 /* HardwareSerial.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = HardwareSerial.cpp; sourceTree = "<group>"; };
-		2259D08C14C854960021B514 /* HardwareSerial.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HardwareSerial.h; sourceTree = "<group>"; };
-		2259D08E14C854960021B514 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
-		2259D09014C854960021B514 /* pins_arduino.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = pins_arduino.c; sourceTree = "<group>"; };
-		2259D09114C854960021B514 /* pins_arduino.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pins_arduino.h; sourceTree = "<group>"; };
-		2259D09314C854960021B514 /* Print.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Print.cpp; sourceTree = "<group>"; };
-		2259D09414C854960021B514 /* Print.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Print.h; sourceTree = "<group>"; };
-		2259D09614C854960021B514 /* Stream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Stream.h; sourceTree = "<group>"; };
-		2259D09714C854960021B514 /* Tone.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Tone.cpp; sourceTree = "<group>"; };
-		2259D09914C854960021B514 /* WCharacter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WCharacter.h; sourceTree = "<group>"; };
-		2259D09A14C854960021B514 /* WConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WConstants.h; sourceTree = "<group>"; };
-		2259D09B14C854960021B514 /* WInterrupts.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = WInterrupts.c; sourceTree = "<group>"; };
-		2259D09D14C854960021B514 /* wiring.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = wiring.c; sourceTree = "<group>"; };
-		2259D09E14C854960021B514 /* wiring.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = wiring.h; sourceTree = "<group>"; };
-		2259D0A014C854960021B514 /* wiring_analog.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = wiring_analog.c; sourceTree = "<group>"; };
-		2259D0A114C854960021B514 /* wiring_analog.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; path = wiring_analog.o; sourceTree = "<group>"; };
-		2259D0A214C854960021B514 /* wiring_digital.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = wiring_digital.c; sourceTree = "<group>"; };
-		2259D0A414C854960021B514 /* wiring_private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = wiring_private.h; sourceTree = "<group>"; };
-		2259D0A514C854960021B514 /* wiring_pulse.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = wiring_pulse.c; sourceTree = "<group>"; };
-		2259D0A714C854960021B514 /* wiring_shift.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = wiring_shift.c; sourceTree = "<group>"; };
-		2259D0A914C854960021B514 /* WMath.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = WMath.cpp; sourceTree = "<group>"; };
-		2259D0AB14C854960021B514 /* WProgram.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WProgram.h; sourceTree = "<group>"; };
-		2259D0AC14C854960021B514 /* WString.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = WString.cpp; sourceTree = "<group>"; };
-		2259D0AD14C854960021B514 /* WString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WString.h; sourceTree = "<group>"; };
 		2259D0B114C855150021B514 /* EEPROM.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EEPROM.cpp; sourceTree = "<group>"; };
 		2259D0B214C855150021B514 /* EEPROM.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EEPROM.h; sourceTree = "<group>"; };
 		2259D0B314C855150021B514 /* EEPROM.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; path = EEPROM.o; sourceTree = "<group>"; };
@@ -170,7 +146,7 @@
 				19A5FF05147579A900FAEAAB /* Makefile */,
 				19A5FF06147579A900FAEAAB /* README */,
 				19A5FF0714757A6A00FAEAAB /* src */,
-				2259D08914C854960021B514 /* arduino */,
+				02BCCD7D14CBDF280089223E /* arduino */,
 				2259D0AF14C855150021B514 /* libraries */,
 				19A5FEEE1475790300FAEAAB /* config */,
 				22FCDCB614C8F1830033ABF6 /* fake target */,
@@ -213,39 +189,6 @@
 			);
 			path = src;
 			sourceTree = "<group>";
-		};
-		2259D08914C854960021B514 /* arduino */ = {
-			isa = PBXGroup;
-			children = (
-				2259D08A14C854960021B514 /* binary.h */,
-				2259D08B14C854960021B514 /* HardwareSerial.cpp */,
-				2259D08C14C854960021B514 /* HardwareSerial.h */,
-				2259D08E14C854960021B514 /* main.cpp */,
-				2259D09014C854960021B514 /* pins_arduino.c */,
-				2259D09114C854960021B514 /* pins_arduino.h */,
-				2259D09314C854960021B514 /* Print.cpp */,
-				2259D09414C854960021B514 /* Print.h */,
-				2259D09614C854960021B514 /* Stream.h */,
-				2259D09714C854960021B514 /* Tone.cpp */,
-				2259D09914C854960021B514 /* WCharacter.h */,
-				2259D09A14C854960021B514 /* WConstants.h */,
-				2259D09B14C854960021B514 /* WInterrupts.c */,
-				2259D09D14C854960021B514 /* wiring.c */,
-				2259D09E14C854960021B514 /* wiring.h */,
-				2259D0A014C854960021B514 /* wiring_analog.c */,
-				2259D0A114C854960021B514 /* wiring_analog.o */,
-				2259D0A214C854960021B514 /* wiring_digital.c */,
-				2259D0A414C854960021B514 /* wiring_private.h */,
-				2259D0A514C854960021B514 /* wiring_pulse.c */,
-				2259D0A714C854960021B514 /* wiring_shift.c */,
-				2259D0A914C854960021B514 /* WMath.cpp */,
-				2259D0AB14C854960021B514 /* WProgram.h */,
-				2259D0AC14C854960021B514 /* WString.cpp */,
-				2259D0AD14C854960021B514 /* WString.h */,
-			);
-			name = arduino;
-			path = /Applications/Arduino.app/Contents/Resources/Java/hardware/arduino/cores/arduino;
-			sourceTree = "<absolute>";
 		};
 		2259D0AF14C855150021B514 /* libraries */ = {
 			isa = PBXGroup;
@@ -535,7 +478,7 @@
 			attributes = {
 				LastUpgradeCheck = 0420;
 			};
-			buildConfigurationList = 19A5FEE6147578E500FAEAAB /* Build configuration list for PBXProject "ArduinoOnXCode4" */;
+			buildConfigurationList = 19A5FEE6147578E500FAEAAB /* Build configuration list for PBXProject "ArduinoOnXcodeProject" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -625,7 +568,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		19A5FEE6147578E500FAEAAB /* Build configuration list for PBXProject "ArduinoOnXCode4" */ = {
+		19A5FEE6147578E500FAEAAB /* Build configuration list for PBXProject "ArduinoOnXcodeProject" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				19A5FEEA147578E500FAEAAB /* Release */,

@@ -34,8 +34,6 @@
 		2259D1A214C85BB30021B514 /* Pro168.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Pro168.xcconfig; sourceTree = "<group>"; };
 		2259D1A314C85BB30021B514 /* Pro328.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Pro328.xcconfig; sourceTree = "<group>"; };
 		2259D1A414C85BB30021B514 /* Uno.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Uno.xcconfig; sourceTree = "<group>"; };
-		22FCDCB714C8F1830033ABF6 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
-		22FCDCB914C8F1830033ABF6 /* fake_target.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = fake_target.1; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
@@ -57,7 +55,6 @@
 				19A5FF0714757A6A00FAEAAB /* src */,
 				02BCCD7E14CBDF930089223E /* Arduino Application */,
 				19A5FEEE1475790300FAEAAB /* config */,
-				22FCDCB614C8F1830033ABF6 /* fake target */,
 				22FCDCB414C8F1830033ABF6 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -104,15 +101,6 @@
 			children = (
 			);
 			name = Products;
-			sourceTree = "<group>";
-		};
-		22FCDCB614C8F1830033ABF6 /* fake target */ = {
-			isa = PBXGroup;
-			children = (
-				22FCDCB714C8F1830033ABF6 /* main.cpp */,
-				22FCDCB914C8F1830033ABF6 /* fake_target.1 */,
-			);
-			path = "fake target";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

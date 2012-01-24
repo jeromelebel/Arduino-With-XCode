@@ -41,8 +41,8 @@ DEBUG = stabs
 OPT = s
 
 # Place -D or -U options here
-CDEFS = -DF_CPU=$(F_CPU)
-CXXDEFS = -DF_CPU=$(F_CPU)
+CDEFS = -DF_CPU=$(F_CPU) -DARDUINO=$(ARDUINO_VERSION)
+CXXDEFS = -DF_CPU=$(F_CPU) -DARDUINO=$(ARDUINO_VERSION)
 
 # Place -I options here : include libraries
 CINCS = -I$(ARD_CORE_PATH) -I$(ARD_VARIANT_PATH) $(INCLUDE_LIBRARIES)

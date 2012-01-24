@@ -1,7 +1,7 @@
 #ifndef _TEST_THING_
 #define _TEST_THING_
 
-#include "WProgram.h"
+#include <Arduino.h>
 
 class TestThing{
 public:

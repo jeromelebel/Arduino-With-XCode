@@ -1,6 +1,6 @@
 
 
-#include "WProgram.h"
+#include <Arduino.h>
 #include "ArduinoProgram.h"
 
 // Arduino doesn't know about new and delete, so let's teach 'm :

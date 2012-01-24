@@ -1,7 +1,7 @@
 #ifndef _ARDUINO_PROGRAM_H
 #define _ARDUINO_PROGRAM_H
 
-#include "WProgram.h"
+#include <Arduino.h>
 
 /********************************************
  LIBRARIES

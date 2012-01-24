@@ -94,11 +94,11 @@ ALL_CXXFLAGS = -mmcu=$(MCU) -I. $(CXXFLAGS)
 ALL_ASFLAGS = -mmcu=$(MCU) -I. -x assembler-with-cpp $(ASFLAGS)
 
 
+all: clean build sizeafter upload
+	@echo "action = all";
+
+
 # Default target.
-all: build sizeafter upload
-	@echo "action = default";
-
-
 build: info folder elf hex
 	@echo "action = build";
 
@@ -224,4 +224,4 @@ depend:
 		>> $(MAKEFILE); \
 	$(CC) -M -mmcu=$(MCU) $(CDEFS) $(CINCS) $(SRC) $(ASRC) >> $(MAKEFILE)
 
-.PHONY:	all build elf hex eep lss sym program coff extcoff clean depend info sizeafter sizebefore folder
+.PHONY:	build all elf hex eep lss sym program coff extcoff clean depend info sizeafter sizebefore folder

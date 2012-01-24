@@ -95,13 +95,13 @@ ALL_CXXFLAGS = -mmcu=$(MCU) -I. $(CXXFLAGS)
 ALL_ASFLAGS = -mmcu=$(MCU) -I. -x assembler-with-cpp $(ASFLAGS)
 
 
-all: clean build sizeafter upload
-	@echo "action = all";
-
-
 # Default target.
 build: info folder elf hex
 	@echo "action = build";
+
+
+all: clean build sizeafter upload
+	@echo "action = all";
 
 		
 

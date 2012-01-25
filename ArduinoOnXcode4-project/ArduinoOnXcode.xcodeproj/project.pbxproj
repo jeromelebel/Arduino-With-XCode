@@ -7,10 +7,8 @@
 	objects = {
 
 /* Begin PBXFileReference section */
-		02869DB814CF82A700D5DD37 /* arduino */ = {isa = PBXFileReference; lastKnownFileType = folder; name = arduino; path = Contents/Resources/Java/hardware/arduino/cores/arduino; sourceTree = "<group>"; };
-		02BCCD7F14CBE00F0089223E /* libraries */ = {isa = PBXFileReference; lastKnownFileType = folder; name = libraries; path = Contents/Resources/Java/libraries; sourceTree = "<group>"; };
+		02869DBB14CF849C00D5DD37 /* hardware */ = {isa = PBXFileReference; lastKnownFileType = folder; name = hardware; path = Contents/Resources/Java/hardware; sourceTree = "<group>"; };
 		02BCCD8714CBE31D0089223E /* Mini328.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Mini328.xcconfig; sourceTree = "<group>"; };
-		02BCCD8E14CBE85A0089223E /* examples */ = {isa = PBXFileReference; lastKnownFileType = folder; name = examples; path = Contents/Resources/Java/examples; sourceTree = "<group>"; };
 		19A5FF05147579A900FAEAAB /* Makefile */ = {isa = PBXFileReference; explicitFileType = sourcecode.make; fileEncoding = 4; path = Makefile; sourceTree = "<group>"; };
 		19A5FF06147579A900FAEAAB /* README */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README; sourceTree = "<group>"; };
 		19A5FF0814757A6A00FAEAAB /* ArduinoProgram.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ArduinoProgram.cpp; sourceTree = "<group>"; };
@@ -41,9 +39,7 @@
 		02BCCD7E14CBDF930089223E /* Arduino Application */ = {
 			isa = PBXGroup;
 			children = (
-				02869DB814CF82A700D5DD37 /* arduino */,
-				02BCCD8E14CBE85A0089223E /* examples */,
-				02BCCD7F14CBE00F0089223E /* libraries */,
+				02869DBB14CF849C00D5DD37 /* hardware */,
 			);
 			name = "Arduino Application";
 			path = /Applications/Arduino.app;

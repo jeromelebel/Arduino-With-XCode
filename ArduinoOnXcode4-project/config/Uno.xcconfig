@@ -9,4 +9,3 @@ F_CPU = 16000000
 FORMAT = ihex
 UPLOAD_RATE = 115200
 PORT = /dev/tty.usbmodem*
-ARDUINO_CORE = arduino

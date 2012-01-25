@@ -9,7 +9,6 @@ SOURCES = $(wildcard src/*.cpp) #*/
 # add arduino app path to the paths..
 ARD_LIBRARIES = $(ARDUINO_LIBRARIES)
 ARD_LIBRARIES_PATH = $(ARDUINO_APP_PATH)$(ARDUINO_LIBRARIES_PATH)
-ARD_CORE_PATH = $(ARDUINO_APP_PATH)$(ARDUINO_PATH)/cores/$(ARDUINO_CORE)
 
 # make the correct paths for the libraries
 INCLUDE_LIBRARIES = $(addprefix -I$(ARD_LIBRARIES_PATH)/,$(ARD_LIBRARIES)) \
@@ -35,9 +34,11 @@ MCU = $(call READ_BOARD_TXT, $(BOARD_NAME).build.mcu, $(BOARDS_TXT))
 UPLOAD_RATE = $(call READ_BOARD_TXT, $(BOARD_NAME).upload.speed, $(BOARDS_TXT))
 FORMAT = ihex
 VARIANT_NAME = $(call READ_BOARD_TXT, $(BOARD_NAME).build.variant, $(BOARDS_TXT))
+CORE_NAME = $(call READ_BOARD_TXT, $(BOARD_NAME).build.core, $(BOARDS_TXT))
 
 
 ARD_VARIANT_PATH = $(ARDUINO_APP_PATH)$(ARDUINO_PATH)/variants/$(VARIANT_NAME)
+ARD_CORE_PATH = $(ARDUINO_APP_PATH)$(ARDUINO_PATH)/cores/$(CORE_NAME)
 
 
 # main file

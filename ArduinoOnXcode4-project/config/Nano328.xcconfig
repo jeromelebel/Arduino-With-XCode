@@ -4,4 +4,3 @@
 BOARD_NAME = nano328
 BOARD = Arduino_Nano
 DESCRIPTION = Arduino Nano w/ ATmega328
-ARDUINO_CORE = arduino

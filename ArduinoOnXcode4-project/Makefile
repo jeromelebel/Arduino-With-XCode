@@ -10,7 +10,6 @@ SOURCES = $(wildcard src/*.cpp) #*/
 ARD_LIBRARIES = $(ARDUINO_LIBRARIES)
 ARD_LIBRARIES_PATH = $(ARDUINO_APP_PATH)$(ARDUINO_LIBRARIES_PATH)
 ARD_CORE_PATH = $(ARDUINO_APP_PATH)$(ARDUINO_PATH)/cores/$(ARDUINO_CORE)
-ARD_VARIANT_PATH = $(ARDUINO_APP_PATH)$(ARDUINO_PATH)/variants/$(ARDUINO_VARIANT)
 
 # make the correct paths for the libraries
 INCLUDE_LIBRARIES = $(addprefix -I$(ARD_LIBRARIES_PATH)/,$(ARD_LIBRARIES)) \
@@ -35,8 +34,10 @@ DESCRIPTION = $(call READ_BOARD_TXT, $(BOARDNAME).name, $(BOARDS_TXT))
 MCU = $(call READ_BOARD_TXT, $(BOARDNAME).build.mcu, $(BOARDS_TXT))
 UPLOAD_RATE = $(call READ_BOARD_TXT, $(BOARDNAME).upload.speed, $(BOARDS_TXT))
 FORMAT = ihex
+VARIANT_NAME = $(call READ_BOARD_TXT, $(BOARDNAME).build.variant, $(BOARDS_TXT))
 
 
+ARD_VARIANT_PATH = $(ARDUINO_APP_PATH)$(ARDUINO_PATH)/variants/$(VARIANT_NAME)
 
 
 # main file
@@ -140,6 +141,7 @@ info:
 	@echo "mcu: \t\t" $(MCU);
 	@echo "upload speed: \t" $(UPLOAD_RATE);
 	@echo "port: \t\t" $(PORT);
+	@echo "variant: \t\t" $(VARIANT_NAME);
 	
 	@echo " ";
 

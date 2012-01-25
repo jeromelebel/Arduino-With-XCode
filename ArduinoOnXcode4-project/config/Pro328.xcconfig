@@ -9,5 +9,4 @@ F_CPU = 16000000
 FORMAT = ihex
 UPLOAD_RATE = 57600
 PORT = /dev/tty.usbserial*
-ARDUINO_VARIANT = standard
 ARDUINO_CORE = arduino

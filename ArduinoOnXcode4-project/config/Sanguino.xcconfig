@@ -4,4 +4,4 @@
 BOARDS_TXT_PATH = /Contents/Resources/Java/hardware/Sanguino/boards.txt
 ARDUINO_PATH = /Contents/Resources/Java/hardware/Sanguino/cores/arduino
 ARDUINO_LIBRARIES = Wire Wire/utility EEPROM Servo SoftwareSerial Stepper 
-BOARDNAME = Sanguino
+BOARD_NAME = Sanguino

@@ -4,7 +4,7 @@ AVRDUDE_DIR = $(ARDUINO_APP_PATH)/Contents/Resources/Java/hardware/tools/avr/bin
 AVRDUDE_CONF= $(ARDUINO_APP_PATH)/Contents/Resources/Java/hardware/tools/avr/etc/avrdude.conf
 BIN_PATH = $(BUILD_DIR)
 SIZE = $(AVRDUDE_DIR)/avr-size
-SOURCES = $(wildcard src/*.cpp)
+SOURCES = $(wildcard src/*.cpp) #*/
 
 # add arduino app path to the paths..
 ARD_LIBRARIES = $(ARDUINO_LIBRARIES)
@@ -17,9 +17,8 @@ INCLUDE_LIBRARIES = $(addprefix -I$(ARD_LIBRARIES_PATH)/,$(ARD_LIBRARIES)) \
 $(addprefix -I, $(wildcard $(LIBRARY_PATHS)))
 
 # find .cpp files in libraries
-CPP_LIBRARIES = $(foreach lib,$(ARD_LIBRARIES),$(wildcard $(ARD_LIBRARIES_PATH)$(lib)/*.cpp))
-CPP_LIBRARIES += $(foreach item, $(LIBRARY_PATHS), $(wildcard $(item)/*.cpp))
-
+CPP_LIBRARIES = $(foreach lib,$(ARD_LIBRARIES),$(wildcard $(ARD_LIBRARIES_PATH)$(lib)/*.cpp)) #*/
+CPP_LIBRARIES += $(foreach item, $(LIBRARY_PATHS), $(wildcard $(item)/*.cpp)) #*/
 
 BOARDS_TXT = $(ARDUINO_APP_PATH)$(BOARDS_TXT_PATH)
 
@@ -44,10 +43,10 @@ FORMAT = ihex
 TARGET = main
 
 # find .c files in arduino directory
-SRC = $(wildcard $(ARD_CORE_PATH)/*.c)
+SRC = $(wildcard $(ARD_CORE_PATH)/*.c) #*/
 
 # .cpp files from libraries and arduino directory
-CXXSRC = $(SOURCES) $(wildcard $(ARD_CORE_PATH)/*.cpp) $(CPP_LIBRARIES) 
+CXXSRC = $(SOURCES) $(wildcard $(ARD_CORE_PATH)/*.cpp) $(CPP_LIBRARIES) #*/
 
 
 # Name of this Makefile (used for "make depend").
@@ -145,7 +144,7 @@ info:
 	@echo " ";
 
 	@echo "Library paths: \n\t" $(LIBRARY_PATHS);
-	@echo "Library cpp files: \n\t" $(foreach item,$(LIBRARY_PATHS), $(wildcard $(item)/*.cpp));
+	@echo "Library cpp files: \n\t" $(foreach item,$(LIBRARY_PATHS), $(wildcard $(item)/*.cpp)); #*/
 	@echo "Compiling sources: \n\t" $(CXXSRC);
 	@echo "Compiling libraries sources: \n\t" $(CPP_LIBRARIES);
 	@echo "Included libraries: \n\t" $(INCLUDE_LIBRARIES);
@@ -239,7 +238,7 @@ $(BIN_PATH)/$(TARGET).elf: $(BIN_PATH)/core.a
 clean:
 	$(REMOVE) $(BIN_PATH)/*.o $(BIN_PATH)/*.a $(BIN_PATH)/$(TARGET).hex $(BIN_PATH)/$(TARGET).eep $(BIN_PATH)/$(TARGET).cof $(BIN_PATH)/$(TARGET).elf \
 	$(BIN_PATH)/$(TARGET).map $(BIN_PATH)/$(TARGET).sym $(BIN_PATH)/$(TARGET).lss $(BIN_PATH)/core.a \
-	$(OBJ) $(LST) $(SRC:.c=.s) $(SRC:.c=.d) $(CXXSRC:.cpp=.s) $(CXXSRC:.cpp=.d)
+	$(OBJ) $(LST) $(SRC:.c=.s) $(SRC:.c=.d) $(CXXSRC:.cpp=.s) $(CXXSRC:.cpp=.d) #*/
 
 depend:
 	if grep '^# DO NOT DELETE' $(MAKEFILE) >/dev/null; \

@@ -82,11 +82,11 @@ CXXFLAGS = $(CDEFS) $(CXXINCS) -O$(OPT) $(CTUNING)
 LDFLAGS = -lm -Wl,-gc-sections -mmcu=$(MCU)
 
 # Programming support using avrdude. Settings and variables.
-AVRDUDE_PROGRAMMER = stk500v1
+AVRDUDE_PROGRAMMER = stk500v2
 AVRDUDE_PORT = $(PORT)
-AVRDUDE_WRITE_FLASH = -U flash:w:$(BIN_PATH)/$(TARGET).hex
-AVRDUDE_FLAGS = -F -p $(MCU) -P $(AVRDUDE_PORT) -c $(AVRDUDE_PROGRAMMER) \
-  -b $(UPLOAD_RATE) -D
+AVRDUDE_WRITE_FLASH = -Uflash:w:$(BIN_PATH)/$(TARGET).hex:i
+AVRDUDE_FLAGS = -p$(MCU) -P$(AVRDUDE_PORT) -c $(AVRDUDE_PROGRAMMER) \
+  -b$(UPLOAD_RATE) -D
   
 
 # Program settings

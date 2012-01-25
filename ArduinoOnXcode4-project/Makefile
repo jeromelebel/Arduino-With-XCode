@@ -83,7 +83,7 @@ LDFLAGS = -lm -Wl,-gc-sections -mmcu=$(MCU)
 
 # Programming support using avrdude. Settings and variables.
 AVRDUDE_PROGRAMMER = stk500v2
-AVRDUDE_PORT = $(PORT)
+AVRDUDE_PORT = $(shell ls $(PORT))
 AVRDUDE_WRITE_FLASH = -Uflash:w:$(BIN_PATH)/$(TARGET).hex:i
 AVRDUDE_FLAGS = -p$(MCU) -P$(AVRDUDE_PORT) -c $(AVRDUDE_PROGRAMMER) \
   -b$(UPLOAD_RATE) -D

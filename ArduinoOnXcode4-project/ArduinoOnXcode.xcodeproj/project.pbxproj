@@ -157,6 +157,7 @@
 			baseConfigurationReference = 2259D19C14C85BB30021B514 /* Mega2560.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
+				BOARDS_TXT_PATH = "$(HARDWARE_PATH)/boards.txt";
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -166,6 +167,7 @@
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				HARDWARE_PATH = "$(ARDUINO_APP_PATH)/Contents/Resources/Java/hardware/$(HARDWARE_NAME)";
 				LIBRARY_PATHS = "";
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				PORT = "/dev/tty.usbmodem*";

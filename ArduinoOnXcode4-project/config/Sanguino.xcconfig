@@ -1,7 +1,7 @@
 #include "_basic_arduino_settings.xcconfig"
 
 // Sanguino Makerbot Motherboard
-BOARDS_TXT_PATH = /Contents/Resources/Java/hardware/Sanguino/boards.txt
+HARDWARE_NAME = Sanguino
 ARDUINO_PATH = /Contents/Resources/Java/hardware/Sanguino/cores/arduino
 ARDUINO_LIBRARIES = Wire Wire/utility EEPROM Servo SoftwareSerial Stepper 
 BOARD_NAME = Sanguino

@@ -2,8 +2,7 @@
 
 ARDUINO_VERSION = 100
 ARDUINO_APP_PATH = /Applications/Arduino.app
-ARDUINO_PATH = /Contents/Resources/Java/hardware/arduino
-BOARDS_TXT_PATH = $(ARDUINO_PATH)/boards.txt
+HARDWARE_NAME = arduino
 ARDUINO_LIBRARIES_PATH = /Contents/Resources/Java/libraries
 ARDUINO_LIBRARIES = Wire Wire/utility EEPROM Ethernet Ethernet/utility  SPI Firmata LiquidCrystal Matrix Sprite SD SD/utility Servo SoftwareSerial Stepper 
 PORT = /dev/tty.usbserial* or /dev/tty.usbmodem*

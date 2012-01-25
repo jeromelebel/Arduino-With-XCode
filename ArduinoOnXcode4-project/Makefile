@@ -18,8 +18,6 @@ $(addprefix -I, $(wildcard $(LIBRARY_PATHS)))
 CPP_LIBRARIES = $(foreach lib,$(ARD_LIBRARIES),$(wildcard $(ARD_LIBRARIES_PATH)$(lib)/*.cpp)) #*/
 CPP_LIBRARIES += $(foreach item, $(LIBRARY_PATHS), $(wildcard $(item)/*.cpp)) #*/
 
-BOARDS_TXT = $(ARDUINO_APP_PATH)$(BOARDS_TXT_PATH)
-
 # result = $(call READ_BOARD_TXT, 'boardname.parameter', 'pathfileboards.txt')
 nullstring  :=
 spacestring := $(nullstring) # end of the line
@@ -28,17 +26,17 @@ equalstring := $(nullstring)=# end of the line
 READ_BOARD_TXT = $(subst $(1)=,, $(shell grep -e$(1) $(2)))
 
 parameter = build.f_cpu
-F_CPU = $(call READ_BOARD_TXT, $(BOARD_NAME).build.f_cpu, $(BOARDS_TXT))
-DESCRIPTION = $(call READ_BOARD_TXT, $(BOARD_NAME).name, $(BOARDS_TXT))
-MCU = $(call READ_BOARD_TXT, $(BOARD_NAME).build.mcu, $(BOARDS_TXT))
-UPLOAD_RATE = $(call READ_BOARD_TXT, $(BOARD_NAME).upload.speed, $(BOARDS_TXT))
+F_CPU = $(call READ_BOARD_TXT, $(BOARD_NAME).build.f_cpu, $(BOARDS_TXT_PATH))
+DESCRIPTION = $(call READ_BOARD_TXT, $(BOARD_NAME).name, $(BOARDS_TXT_PATH))
+MCU = $(call READ_BOARD_TXT, $(BOARD_NAME).build.mcu, $(BOARDS_TXT_PATH))
+UPLOAD_RATE = $(call READ_BOARD_TXT, $(BOARD_NAME).upload.speed, $(BOARDS_TXT_PATH))
 FORMAT = ihex
-VARIANT_NAME = $(call READ_BOARD_TXT, $(BOARD_NAME).build.variant, $(BOARDS_TXT))
-CORE_NAME = $(call READ_BOARD_TXT, $(BOARD_NAME).build.core, $(BOARDS_TXT))
+VARIANT_NAME = $(call READ_BOARD_TXT, $(BOARD_NAME).build.variant, $(BOARDS_TXT_PATH))
+CORE_NAME = $(call READ_BOARD_TXT, $(BOARD_NAME).build.core, $(BOARDS_TXT_PATH))
 
 
-ARD_VARIANT_PATH = $(ARDUINO_APP_PATH)$(ARDUINO_PATH)/variants/$(VARIANT_NAME)
-ARD_CORE_PATH = $(ARDUINO_APP_PATH)$(ARDUINO_PATH)/cores/$(CORE_NAME)
+ARD_VARIANT_PATH = $(HARDWARE_PATH)/variants/$(VARIANT_NAME)
+ARD_CORE_PATH = $(HARDWARE_PATH)/cores/$(CORE_NAME)
 
 
 # main file

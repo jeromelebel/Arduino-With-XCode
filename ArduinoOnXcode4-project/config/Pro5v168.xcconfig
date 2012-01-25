@@ -1,0 +1,5 @@
+#include "_basic_arduino_settings.xcconfig"
+
+// Arduino Pro or Pro Mini (5V, 16 MHz) w/ ATmega168
+
+BOARD_NAME = pro5v

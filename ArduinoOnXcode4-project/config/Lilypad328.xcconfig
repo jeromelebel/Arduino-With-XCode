@@ -1,0 +1,5 @@
+#include "_basic_arduino_settings.xcconfig"
+
+// LilyPad Arduino w/ ATmega328
+
+BOARD_NAME = lilypad328

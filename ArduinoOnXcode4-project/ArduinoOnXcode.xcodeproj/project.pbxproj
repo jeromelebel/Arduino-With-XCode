@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXFileReference section */
+		02869DB814CF82A700D5DD37 /* arduino */ = {isa = PBXFileReference; lastKnownFileType = folder; name = arduino; path = Contents/Resources/Java/hardware/arduino/cores/arduino; sourceTree = "<group>"; };
 		02BCCD7F14CBE00F0089223E /* libraries */ = {isa = PBXFileReference; lastKnownFileType = folder; name = libraries; path = Contents/Resources/Java/libraries; sourceTree = "<group>"; };
 		02BCCD8714CBE31D0089223E /* Mini328.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Mini328.xcconfig; sourceTree = "<group>"; };
 		02BCCD8E14CBE85A0089223E /* examples */ = {isa = PBXFileReference; lastKnownFileType = folder; name = examples; path = Contents/Resources/Java/examples; sourceTree = "<group>"; };
@@ -40,6 +41,7 @@
 		02BCCD7E14CBDF930089223E /* Arduino Application */ = {
 			isa = PBXGroup;
 			children = (
+				02869DB814CF82A700D5DD37 /* arduino */,
 				02BCCD8E14CBE85A0089223E /* examples */,
 				02BCCD7F14CBE00F0089223E /* libraries */,
 			);

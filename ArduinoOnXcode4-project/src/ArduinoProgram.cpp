@@ -14,7 +14,7 @@ void ArduinoProgram::setup(){
 	thing -> setup();
     
     // XCode does completion for this now too!
-    servo->readMicroseconds();
+//    servo->readMicroseconds();
 }
 
 

@@ -28,6 +28,15 @@
       buildConfiguration = "Release">
       <Testables>
       </Testables>
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "19A5FF0D14757BAC00FAEAAB"
+            BuildableName = "Arduino"
+            BlueprintName = "Arduino"
+            ReferencedContainer = "container:ArduinoOnXcode.xcodeproj">
+         </BuildableReference>
+      </MacroExpansion>
    </TestAction>
    <LaunchAction
       selectedDebuggerIdentifier = ""
@@ -38,11 +47,20 @@
       debugDocumentVersioning = "YES"
       allowLocationSimulation = "YES">
       <PathRunnable
-         FilePath = "/usr/bin/gnumake">
+         FilePath = "/bin/sh">
       </PathRunnable>
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "19A5FF0D14757BAC00FAEAAB"
+            BuildableName = "Arduino"
+            BlueprintName = "Arduino"
+            ReferencedContainer = "container:ArduinoOnXcode.xcodeproj">
+         </BuildableReference>
+      </MacroExpansion>
       <CommandLineArguments>
          <CommandLineArgument
-            argument = "upload"
+            argument = "$(PROJECT_DIR)/zobzob"
             isEnabled = "YES">
          </CommandLineArgument>
       </CommandLineArguments>

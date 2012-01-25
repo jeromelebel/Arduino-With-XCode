@@ -2,6 +2,7 @@
 
 // Arduino Duemilanove or Nano w/ ATmega328
 // Arduino Duemillanove
+BOARD_NAME = atmega328
 BOARD = Arduino_Duemilanove
 DESCRIPTION = Arduino Diecimila or Duemilanove w/ ATmega168
 MCU = atmega328p

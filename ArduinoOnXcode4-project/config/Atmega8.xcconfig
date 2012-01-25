@@ -1,6 +1,7 @@
 #include "_basic_arduino_settings.xcconfig"
 
 // Arduino NG
+BOARD_NAME = atmega8
 BOARD = Arduino_NG
 DESCRIPTION = Arduino NG or older w/ ATmega8
 MCU = atmega8

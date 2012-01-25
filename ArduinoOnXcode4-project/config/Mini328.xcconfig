@@ -1,5 +1,6 @@
 #include "_basic_arduino_settings.xcconfig"
 
+BOARD_NAME = mini328
 BOARD = Arduino_Mini_328
 DESCRIPTION = Arduino Mini w/ ATmega328
 MCU = atmega328p

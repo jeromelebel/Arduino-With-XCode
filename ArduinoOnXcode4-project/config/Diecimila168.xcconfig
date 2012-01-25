@@ -2,6 +2,7 @@
 
 // Arduino Diecimila, Duemilanove or Nano with ATmega168
 
+BOARD_NAME = diecimila
 BOARD = Arduino_Diecimila
 DESCRIPTION = Arduino Diecimila or Duemilanove w/ ATmega168
 MCU = atmega168

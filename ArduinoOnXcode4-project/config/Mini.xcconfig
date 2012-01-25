@@ -2,6 +2,7 @@
 
 // Arduino Mini
 
+BOARD_NAME = mini
 BOARD = Arduino_Mini
 DESCRIPTION = Arduino Mini w/ ATmega168
 MCU = atmega168

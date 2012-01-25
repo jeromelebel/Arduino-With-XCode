@@ -2,6 +2,7 @@
 
 // Arduino Mega 1280
 
+BOARD_NAME = mega
 BOARD = Arduino_Mega_1280
 DESCRIPTION = Arduino Mega (ATmega1280)
 MCU = atmega1280

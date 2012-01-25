@@ -2,6 +2,7 @@
 
 // Arduino BT with Atmega328
 
+BOARD_NAME = bt328
 BOARD = Arduinot_BT_328
 DESCRIPTION = Arduino BT w/ ATmega328
 MCU = atmega328p

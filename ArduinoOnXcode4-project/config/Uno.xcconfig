@@ -1,6 +1,7 @@
 #include "_basic_arduino_settings.xcconfig"
 
 // Arduino UNO
+BOARD_NAME = uno
 BOARD = Arduino_UNO
 DESCRIPTION = Arduino UNO
 MCU = atmega328p

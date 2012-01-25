@@ -29,12 +29,12 @@ equalstring := $(nullstring)=# end of the line
 READ_BOARD_TXT = $(subst $(1)=,, $(shell grep -e$(1) $(2)))
 
 parameter = build.f_cpu
-F_CPU = $(call READ_BOARD_TXT, $(BOARDNAME).build.f_cpu, $(BOARDS_TXT))
-DESCRIPTION = $(call READ_BOARD_TXT, $(BOARDNAME).name, $(BOARDS_TXT))
-MCU = $(call READ_BOARD_TXT, $(BOARDNAME).build.mcu, $(BOARDS_TXT))
-UPLOAD_RATE = $(call READ_BOARD_TXT, $(BOARDNAME).upload.speed, $(BOARDS_TXT))
+F_CPU = $(call READ_BOARD_TXT, $(BOARD_NAME).build.f_cpu, $(BOARDS_TXT))
+DESCRIPTION = $(call READ_BOARD_TXT, $(BOARD_NAME).name, $(BOARDS_TXT))
+MCU = $(call READ_BOARD_TXT, $(BOARD_NAME).build.mcu, $(BOARDS_TXT))
+UPLOAD_RATE = $(call READ_BOARD_TXT, $(BOARD_NAME).upload.speed, $(BOARDS_TXT))
 FORMAT = ihex
-VARIANT_NAME = $(call READ_BOARD_TXT, $(BOARDNAME).build.variant, $(BOARDS_TXT))
+VARIANT_NAME = $(call READ_BOARD_TXT, $(BOARD_NAME).build.variant, $(BOARDS_TXT))
 
 
 ARD_VARIANT_PATH = $(ARDUINO_APP_PATH)$(ARDUINO_PATH)/variants/$(VARIANT_NAME)
@@ -135,7 +135,7 @@ sym: $(BIN_PATH)/$(TARGET).sym
 # print info
 info:
 	@echo "------------------------ some info for debugging ------------------";
-	@echo "board name: \t" $(BOARDNAME);
+	@echo "board name: \t" $(BOARD_NAME);
 	@echo "description: \t" $(DESCRIPTION);
 	@echo "cpu: \t\t\t" $(F_CPU); 
 	@echo "mcu: \t\t" $(MCU);

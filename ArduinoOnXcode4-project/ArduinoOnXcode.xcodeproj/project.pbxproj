@@ -73,8 +73,8 @@
 				2259D19D14C85BB30021B514 /* Mini.xcconfig */,
 				2259D19714C85BB30021B514 /* BT328.xcconfig */,
 				2259D19614C85BB30021B514 /* BT168.xcconfig */,
-				2259D1A214C85BB30021B514 /* Pro168.xcconfig */,
 				2259D1A314C85BB30021B514 /* Pro328.xcconfig */,
+				2259D1A214C85BB30021B514 /* Pro168.xcconfig */,
 				2259D1A114C85BB30021B514 /* Atmega168.xcconfig */,
 				2259D1A014C85BB30021B514 /* Atmega8.xcconfig */,
 				2259D19514C85BB30021B514 /* Sanguino.xcconfig */,
@@ -149,7 +149,6 @@
 			baseConfigurationReference = 2259D19C14C85BB30021B514 /* Mega2560.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
-				BOARDNAME = uno;
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_C_LANGUAGE_STANDARD = gnu99;

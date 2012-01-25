@@ -2,6 +2,7 @@
 
 // Arduino Mega 2560
 
+BOARD_NAME = mega2560
 BOARD = Arduino_Mega_2560
 DESCRIPTION = Arduino Mega 2560 or Mega ADK
 MCU = atmega2560

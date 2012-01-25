@@ -1,7 +1,7 @@
 #include "_basic_arduino_settings.xcconfig"
 
 // Arduino NG
-
+BOARD_NAME = atmega168
 BOARD = Arduino_NG
 DESCRIPTION = Arduino NG or older w/ ATmega168
 MCU = atmega168

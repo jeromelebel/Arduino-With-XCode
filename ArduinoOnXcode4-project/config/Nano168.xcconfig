@@ -2,6 +2,7 @@
 // Arduino Nano 168
 #include "Diecimila168.xcconfig"
 
+BOARD_NAME = nano
 BOARD = Arduino_Nano_168
 DESCRIPTION = Arduino Nano w/ ATmega168
 ARDUINO_CORE = arduino

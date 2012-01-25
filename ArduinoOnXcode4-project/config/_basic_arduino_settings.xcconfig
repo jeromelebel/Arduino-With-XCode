@@ -8,6 +8,7 @@ ARDUINO_LIBRARIES_PATH = /Contents/Resources/Java/libraries
 ARDUINO_LIBRARIES = Wire Wire/utility EEPROM Ethernet Ethernet/utility  SPI Firmata LiquidCrystal Matrix Sprite SD SD/utility Servo SoftwareSerial Stepper 
 PORT = /dev/tty.usbserial* or /dev/tty.usbmodem*
 LIBRARY_PATHS =
+PORT = /dev/tty.usbserial*
 
 // possible boardnames: 
 // uno

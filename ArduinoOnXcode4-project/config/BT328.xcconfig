@@ -1,12 +1,5 @@
 #include "_basic_arduino_settings.xcconfig"
 
-// Arduino BT with Atmega328
+// Arduino BT w/ ATmega328
 
 BOARD_NAME = bt328
-BOARD = Arduinot_BT_328
-DESCRIPTION = Arduino BT w/ ATmega328
-MCU = atmega328p
-F_CPU = 16000000	
-FORMAT = ihex
-UPLOAD_RATE = 19200
-PORT = /dev/tty.usbserial*

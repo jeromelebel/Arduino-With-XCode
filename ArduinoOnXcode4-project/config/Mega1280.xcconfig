@@ -1,12 +1,5 @@
 #include "_basic_arduino_settings.xcconfig"
 
-// Arduino Mega 1280
+// Arduino Mega (ATmega1280)
 
 BOARD_NAME = mega
-BOARD = Arduino_Mega_1280
-DESCRIPTION = Arduino Mega (ATmega1280)
-MCU = atmega1280
-F_CPU = 16000000
-FORMAT = ihex
-UPLOAD_RATE = 57600
-PORT = /dev/tty.usbserial*

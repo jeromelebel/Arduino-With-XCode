@@ -1,12 +1,5 @@
 #include "_basic_arduino_settings.xcconfig"
 
-// Arduino Duemilanove or Nano w/ ATmega328
-// Arduino Duemillanove
+// Arduino Duemilanove w/ ATmega328
+
 BOARD_NAME = atmega328
-BOARD = Arduino_Duemilanove
-DESCRIPTION = Arduino Diecimila or Duemilanove w/ ATmega168
-MCU = atmega328p
-F_CPU = 16000000	
-FORMAT = ihex
-UPLOAD_RATE = 57600
-PORT = /dev/tty.usbserial*

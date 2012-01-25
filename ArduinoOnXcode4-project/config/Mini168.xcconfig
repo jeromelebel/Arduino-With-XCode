@@ -1,12 +1,5 @@
 #include "_basic_arduino_settings.xcconfig"
 
-// Arduino Mini
+// Arduino Mini w/ ATmega168
 
 BOARD_NAME = mini
-BOARD = Arduino_Mini
-DESCRIPTION = Arduino Mini w/ ATmega168
-MCU = atmega168
-F_CPU = 16000000	
-FORMAT = ihex
-UPLOAD_RATE = 19200
-PORT = /dev/tty.usbserial*

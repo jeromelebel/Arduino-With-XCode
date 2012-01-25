@@ -1,12 +1,5 @@
 #include "_basic_arduino_settings.xcconfig"
 
-// Arduino Mega 2560
+// Arduino Mega 2560 or Mega ADK
 
 BOARD_NAME = mega2560
-BOARD = Arduino_Mega_2560
-DESCRIPTION = Arduino Mega 2560 or Mega ADK
-MCU = atmega2560
-F_CPU = 16000000
-FORMAT = ihex
-UPLOAD_RATE = 115200
-PORT = /dev/tty.usbserial*

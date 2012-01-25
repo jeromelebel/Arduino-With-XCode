@@ -146,7 +146,7 @@
 /* Begin XCBuildConfiguration section */
 		19A5FEEA147578E500FAEAAB /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 2259D19414C85BB30021B514 /* _basic_arduino_settings.xcconfig */;
+			baseConfigurationReference = 2259D19C14C85BB30021B514 /* Mega2560.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				BOARDNAME = uno;

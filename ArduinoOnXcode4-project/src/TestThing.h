@@ -1,7 +1,7 @@
 #ifndef _TEST_THING_
 #define _TEST_THING_
 
-#if ARDUINO_VERSION == 100
+#if ARDUINO == 100
 #include <Arduino.h>
 #else
 #include <WProgram.h>

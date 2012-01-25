@@ -25,7 +25,7 @@
 		2259D19A14C85BB30021B514 /* Duemilanove328.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Duemilanove328.xcconfig; sourceTree = "<group>"; };
 		2259D19B14C85BB30021B514 /* Mega1280.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Mega1280.xcconfig; sourceTree = "<group>"; };
 		2259D19C14C85BB30021B514 /* Mega2560.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Mega2560.xcconfig; sourceTree = "<group>"; };
-		2259D19D14C85BB30021B514 /* Mini.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Mini.xcconfig; sourceTree = "<group>"; };
+		2259D19D14C85BB30021B514 /* Mini168.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Mini168.xcconfig; sourceTree = "<group>"; };
 		2259D19E14C85BB30021B514 /* Nano328.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Nano328.xcconfig; sourceTree = "<group>"; };
 		2259D19F14C85BB30021B514 /* Nano168.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Nano168.xcconfig; sourceTree = "<group>"; };
 		2259D1A014C85BB30021B514 /* Atmega8.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Atmega8.xcconfig; sourceTree = "<group>"; };
@@ -70,7 +70,7 @@
 				2259D19C14C85BB30021B514 /* Mega2560.xcconfig */,
 				2259D19B14C85BB30021B514 /* Mega1280.xcconfig */,
 				02BCCD8714CBE31D0089223E /* Mini328.xcconfig */,
-				2259D19D14C85BB30021B514 /* Mini.xcconfig */,
+				2259D19D14C85BB30021B514 /* Mini168.xcconfig */,
 				2259D19714C85BB30021B514 /* BT328.xcconfig */,
 				2259D19614C85BB30021B514 /* BT168.xcconfig */,
 				2259D1A314C85BB30021B514 /* Pro328.xcconfig */,

@@ -157,6 +157,7 @@
 			baseConfigurationReference = 2259D19C14C85BB30021B514 /* Mega2560.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
+				ARDUINO_APP_PATH = /Applications/Arduino.app;
 				BOARDS_TXT_PATH = "$(HARDWARE_PATH)/boards.txt";
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";

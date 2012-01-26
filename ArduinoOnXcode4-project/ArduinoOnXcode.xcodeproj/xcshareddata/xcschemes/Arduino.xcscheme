@@ -60,7 +60,31 @@
       </MacroExpansion>
       <CommandLineArguments>
          <CommandLineArgument
-            argument = "$(PROJECT_DIR)/zobzob"
+            argument = "$(PROJECT_DIR)/upload-run.sh"
+            isEnabled = "YES">
+         </CommandLineArgument>
+         <CommandLineArgument
+            argument = "${ARDUINO_APP_PATH}"
+            isEnabled = "YES">
+         </CommandLineArgument>
+         <CommandLineArgument
+            argument = "${HEX_PATH}"
+            isEnabled = "YES">
+         </CommandLineArgument>
+         <CommandLineArgument
+            argument = "${BOARDS_TXT_PATH}"
+            isEnabled = "YES">
+         </CommandLineArgument>
+         <CommandLineArgument
+            argument = "${BUILD_DIR}"
+            isEnabled = "YES">
+         </CommandLineArgument>
+         <CommandLineArgument
+            argument = "${PORT}"
+            isEnabled = "YES">
+         </CommandLineArgument>
+         <CommandLineArgument
+            argument = "${HARDWARE_NAME}"
             isEnabled = "YES">
          </CommandLineArgument>
       </CommandLineArguments>

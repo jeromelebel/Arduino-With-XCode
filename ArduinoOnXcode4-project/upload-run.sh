@@ -2,9 +2,6 @@
 
 #  upload-run.sh
 #  ArduinoOnXcode
-#
-#  Created by Jérôme Lebel on 25/01/12.
-#  Copyright (c) 2012 Fotonauts. All rights reserved.
 
 ARDUINO_APP_PATH="$1"
 HEX_PATH="$2"

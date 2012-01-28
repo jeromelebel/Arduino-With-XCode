@@ -68,10 +68,6 @@
             isEnabled = "YES">
          </CommandLineArgument>
          <CommandLineArgument
-            argument = "${HEX_PATH}"
-            isEnabled = "YES">
-         </CommandLineArgument>
-         <CommandLineArgument
             argument = "${BOARDS_TXT_PATH}"
             isEnabled = "YES">
          </CommandLineArgument>
@@ -85,6 +81,10 @@
          </CommandLineArgument>
          <CommandLineArgument
             argument = "${HARDWARE_NAME}"
+            isEnabled = "YES">
+         </CommandLineArgument>
+         <CommandLineArgument
+            argument = "${BOARD_NAME}"
             isEnabled = "YES">
          </CommandLineArgument>
       </CommandLineArguments>

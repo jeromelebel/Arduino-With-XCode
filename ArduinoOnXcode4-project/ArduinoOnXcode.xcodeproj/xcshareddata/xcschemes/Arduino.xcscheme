@@ -87,6 +87,10 @@
             argument = "${BOARD_NAME}"
             isEnabled = "YES">
          </CommandLineArgument>
+         <CommandLineArgument
+            argument = "${HARDWARE_PATH}"
+            isEnabled = "YES">
+         </CommandLineArgument>
       </CommandLineArguments>
       <AdditionalOptions>
       </AdditionalOptions>

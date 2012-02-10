@@ -43,7 +43,7 @@ ARD_CORE_PATH = $(HARDWARE_PATH)/cores/$(CORE_NAME)
 TARGET = main
 
 # find .c files in arduino directory
-SRC = $(wildcard $(ARD_CORE_PATH)/*.c) #*/
+CSRC = $(wildcard $(ARD_CORE_PATH)/*.c) #*/
 
 # .cpp files from libraries and arduino directory
 CXXSRC = $(SOURCES) $(wildcard $(ARD_CORE_PATH)/*.cpp) $(CPP_LIBRARIES) #*/
@@ -102,10 +102,10 @@ REMOVE = rm -f
 MV = mv -f
 
 # Define all object files.
-OBJ = $(SRC:.c=.o) $(CXXSRC:.cpp=.o) $(ASRC:.S=.o)
+OBJ = $(CSRC:.c=.o) $(CXXSRC:.cpp=.o) $(ASRC:.S=.o)
 
 # Define all listing files.
-LST = $(ASRC:.S=.lst) $(CXXSRC:.cpp=.lst) $(SRC:.c=.lst)
+LST = $(ASRC:.S=.lst) $(CXXSRC:.cpp=.lst) $(CSRC:.c=.lst)
 
 # Combine all necessary flags and optional flags.
 # Add target processor to flags.
@@ -239,7 +239,7 @@ $(BIN_PATH)/$(TARGET).elf: $(BIN_PATH)/core.a
 clean:
 	$(REMOVE) $(BIN_PATH)/*.o $(BIN_PATH)/*.a $(BIN_PATH)/$(TARGET).hex $(BIN_PATH)/$(TARGET).eep $(BIN_PATH)/$(TARGET).cof $(BIN_PATH)/$(TARGET).elf \
 	$(BIN_PATH)/$(TARGET).map $(BIN_PATH)/$(TARGET).sym $(BIN_PATH)/$(TARGET).lss $(BIN_PATH)/core.a \
-	$(OBJ) $(LST) $(SRC:.c=.s) $(SRC:.c=.d) $(CXXSRC:.cpp=.s) $(CXXSRC:.cpp=.d) #*/
+	$(OBJ) $(LST) $(CSRC:.c=.s) $(CSRC:.c=.d) $(CXXSRC:.cpp=.s) $(CXXSRC:.cpp=.d) #*/
 
 depend:
 	if grep '^# DO NOT DELETE' $(MAKEFILE) >/dev/null; \
@@ -250,6 +250,6 @@ depend:
 	fi
 	echo '# DO NOT DELETE THIS LINE -- make depend depends on it.' \
 		>> $(MAKEFILE); \
-	$(CC) -M -mmcu=$(MCU) $(CDEFS) $(CINCS) $(SRC) $(ASRC) >> $(MAKEFILE)
+	$(CC) -M -mmcu=$(MCU) $(CDEFS) $(CINCS) $(CSRC) $(ASRC) >> $(MAKEFILE)
 
 .PHONY:	build all elf hex eep lss sym program coff extcoff clean depend info sizeafter sizebefore folder

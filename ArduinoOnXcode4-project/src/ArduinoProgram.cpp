@@ -2,7 +2,7 @@
 
 void ArduinoProgram::setup(){
 	counter = 0;
-	Serial.begin(9600); 
+	Serial.begin(SPEEDRATE); 
     
 	Serial.println("-----------------------------");
 	Serial.println("   saying hi from XCode4     ");

@@ -22,5 +22,10 @@ if [ "${PROTOCOL}" = "" ] ; then
   PROTOCOL="stk500"
 fi
 
+export TERM="vt100"
+
 "${ARDUINO_APP_PATH}/Contents/Resources/Java/hardware/tools/avr/bin/avrdude" "-C${ARDUINO_APP_PATH}/Contents/Resources/Java/hardware/tools/avr/etc/avrdude.conf" "-p${MCU}" "-P${PORT}" "-c${PROTOCOL}" "-b${UPLOAD_RATE}" -D "-Uflash:w:${BUILD_DIR}/main.hex:i"
-screen "${PORT}" "${UPLOAD_RATE}"
+echo "#!/bin/sh" /tmp/arduino.command
+echo "screen \"${PORT}\" \"${UPLOAD_RATE}\"" > /tmp/arduino.command
+chmod 0755 /tmp/arduino.command
+open /tmp/arduino.command

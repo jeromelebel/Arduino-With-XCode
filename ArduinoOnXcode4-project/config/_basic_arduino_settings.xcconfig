@@ -2,7 +2,7 @@
 
 ARDUINO_VERSION = 100
 HARDWARE_NAME = arduino
-ARDUINO_LIBRARIES_PATH = /Contents/Resources/Java/libraries
+ARDUINO_LIBRARY_PATH = /Contents/Resources/Java/libraries
 ARDUINO_LIBRARIES = Wire Wire/utility EEPROM Ethernet Ethernet/utility  SPI Firmata LiquidCrystal Matrix Sprite SD SD/utility Servo SoftwareSerial Stepper 
 LIBRARY_PATHS =
 

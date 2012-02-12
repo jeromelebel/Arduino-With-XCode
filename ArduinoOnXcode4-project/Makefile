@@ -5,15 +5,12 @@ AVRDUDE_CONF= $(ARDUINO_APP_PATH)/Contents/Resources/Java/hardware/tools/avr/etc
 SIZE = $(AVRDUDE_DIR)/avr-size
 SOURCES = $(wildcard src/*.cpp) #*/
 
-# add arduino app path to the paths..
-ARD_LIBRARIES_PATH = $(ARDUINO_APP_PATH)$(ARDUINO_LIBRARY_PATH)
-
 # make the correct paths for the libraries
-INCLUDE_LIBRARIES = $(addprefix -I$(ARD_LIBRARIES_PATH)/,$(ARDUINO_LIBRARIES)) \
+INCLUDE_LIBRARIES = $(addprefix -I$(HARDWARE_LIBRARY_DIR)/,$(HARDWARE_LIBRARIES)) \
 $(addprefix -I, $(wildcard $(LIBRARY_PATHS)))
 
 # find .cpp files in libraries
-CPP_LIBRARIES = $(foreach lib,$(ARDUINO_LIBRARIES),$(wildcard $(ARD_LIBRARIES_PATH)$(lib)/*.cpp)) #*/
+CPP_LIBRARIES = $(foreach lib,$(HARDWARE_LIBRARIES),$(wildcard $(HARDWARE_LIBRARY_DIR)$(lib)/*.cpp)) #*/
 CPP_LIBRARIES += $(foreach item, $(LIBRARY_PATHS), $(wildcard $(item)/*.cpp)) #*/
 
 # result = $(call READ_BOARD_TXT, 'boardname.parameter', 'pathfileboards.txt')

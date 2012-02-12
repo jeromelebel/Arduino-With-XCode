@@ -2,24 +2,5 @@
 
 ARDUINO_VERSION = 100
 HARDWARE_NAME = arduino
-ARDUINO_LIBRARY_PATH = /Contents/Resources/Java/libraries
-ARDUINO_LIBRARIES = Wire Wire/utility EEPROM Ethernet Ethernet/utility  SPI Firmata LiquidCrystal Matrix Sprite SD SD/utility Servo SoftwareSerial Stepper 
-LIBRARY_PATHS =
-
-// possible boardnames: 
-// uno
-// atmega328
-// diecimila
-// mega2560
-// mega
-// mini
-// fio
-// bt328
-// bt
-// lilypad328
-// lilypad
-// pro5v328
-// pro5v
-// pro
-// atmega168
-// atmega8
+HARDWARE_LIBRARY_DIR = ${ARDUINO_APP_PATH}/Contents/Resources/Java/libraries
+HARDWARE_LIBRARIES = Wire Wire/utility EEPROM Ethernet Ethernet/utility  SPI Firmata LiquidCrystal Matrix Sprite SD SD/utility Servo SoftwareSerial Stepper 

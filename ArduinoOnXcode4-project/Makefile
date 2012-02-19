@@ -129,7 +129,6 @@ sym: $(BUILD_DIR)/$(TARGET).sym
 # print info
 info:
 	@echo "------------------------ some info for debugging ------------------";
-	@echo "board name: \t" $(BOARD_NAME);
 	@echo "description: \t" $(DESCRIPTION);
 	@echo "cpu: \t\t\t" $(F_CPU); 
 	@echo "mcu: \t\t" $(MCU);

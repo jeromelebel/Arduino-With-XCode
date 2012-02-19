@@ -11,14 +11,40 @@ void operator delete(void* ptr) { free(ptr); }
 #endif
 
 #include "ArduinoProgram.h"
+//
+//int main(void)
+//{
+//	init();
+//	ArduinoProgram arduino;
+//	arduino.setup();
+//	for (;;)
+//		arduino.loop();
+//	return 0;
+//}
+//
 
-int main(void)
+int zob(void);
+int zob(void)
 {
-	init();
-	ArduinoProgram arduino;
-	arduino.setup();
-	for (;;)
-		arduino.loop();
-	return 0;
+    return 0;
 }
 
+#ifdef __cplusplus
+extern "C"{
+#endif
+
+void setup(void);
+void loop(void);
+
+void setup(void)
+{
+}
+
+void loop(void)
+{
+
+}
+    
+#ifdef __cplusplus
+}
+#endif

@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXFileReference section */
+		02613E4914EDB4E7004DFE8C /* build.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = build.rb; sourceTree = "<group>"; };
+		02613E7E14EDB7A9004DFE8C /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
+		02613E8114EDB7A9004DFE8C /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
+		02613E8214EDB7A9004DFE8C /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		02613E8314EDB7A9004DFE8C /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		02869DBB14CF849C00D5DD37 /* hardware */ = {isa = PBXFileReference; lastKnownFileType = folder; name = hardware; path = Contents/Resources/Java/hardware; sourceTree = "<group>"; };
 		02869DCD14CF92DB00D5DD37 /* Pro5v328.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Pro5v328.xcconfig; sourceTree = "<group>"; };
 		02869DCE14CF92DB00D5DD37 /* Pro5v168.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Pro5v168.xcconfig; sourceTree = "<group>"; };
@@ -41,6 +46,25 @@
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
+		02613E7D14EDB7A9004DFE8C /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				02613E7E14EDB7A9004DFE8C /* Cocoa.framework */,
+				02613E8014EDB7A9004DFE8C /* Other Frameworks */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		02613E8014EDB7A9004DFE8C /* Other Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				02613E8114EDB7A9004DFE8C /* AppKit.framework */,
+				02613E8214EDB7A9004DFE8C /* CoreData.framework */,
+				02613E8314EDB7A9004DFE8C /* Foundation.framework */,
+			);
+			name = "Other Frameworks";
+			sourceTree = "<group>";
+		};
 		02BCCD7E14CBDF930089223E /* Arduino Application */ = {
 			isa = PBXGroup;
 			children = (
@@ -54,10 +78,12 @@
 			isa = PBXGroup;
 			children = (
 				19A5FF05147579A900FAEAAB /* Makefile */,
+				02613E4914EDB4E7004DFE8C /* build.rb */,
 				19A5FF06147579A900FAEAAB /* README */,
 				19A5FF0714757A6A00FAEAAB /* src */,
 				02BCCD7E14CBDF930089223E /* Arduino Application */,
 				19A5FEEE1475790300FAEAAB /* config */,
+				02613E7D14EDB7A9004DFE8C /* Frameworks */,
 				22FCDCB414C8F1830033ABF6 /* Products */,
 				02869DD214D1F1AB00D5DD37 /* upload-run.sh */,
 			);
@@ -116,11 +142,11 @@
 /* Begin PBXLegacyTarget section */
 		19A5FF0D14757BAC00FAEAAB /* Arduino */ = {
 			isa = PBXLegacyTarget;
-			buildArgumentsString = "$(ACTION)";
+			buildArgumentsString = "$(PROJECT_DIR)/build.rb $(ACTION)";
 			buildConfigurationList = 19A5FF0E14757BAC00FAEAAB /* Build configuration list for PBXLegacyTarget "Arduino" */;
 			buildPhases = (
 			);
-			buildToolPath = /usr/bin/make;
+			buildToolPath = /usr/bin/ruby;
 			buildWorkingDirectory = "";
 			dependencies = (
 			);

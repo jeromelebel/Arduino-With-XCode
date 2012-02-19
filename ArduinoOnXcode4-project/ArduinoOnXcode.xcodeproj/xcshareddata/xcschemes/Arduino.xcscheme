@@ -44,6 +44,7 @@
       launchStyle = "0"
       useCustomWorkingDirectory = "NO"
       buildConfiguration = "Release"
+      ignoresPersistentStateOnLaunch = "NO"
       debugDocumentVersioning = "YES"
       allowLocationSimulation = "YES">
       <PathRunnable
@@ -89,6 +90,10 @@
          </CommandLineArgument>
          <CommandLineArgument
             argument = "${HARDWARE_PATH}"
+            isEnabled = "YES">
+         </CommandLineArgument>
+         <CommandLineArgument
+            argument = "${PRODUCT_NAME}"
             isEnabled = "YES">
          </CommandLineArgument>
       </CommandLineArguments>

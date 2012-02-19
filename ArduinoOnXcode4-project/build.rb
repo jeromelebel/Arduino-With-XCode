@@ -12,6 +12,8 @@ require 'FileUtils'
 #puts ENV.inspect
 #puts ENV.keys.inspect
 
+@file_timestamp = {}
+
 def execute(parameters)
     puts parameters.join(" ")
     system *parameters
@@ -31,11 +33,36 @@ def load_hardware_info(info_filename, board_name)
     result
 end
 
-def should_build(source_filename, object_filename, dependency_filename)
-    if File.directory?(object_filename)
-        FileUtils.rm_r(object_filename)
+def file_timestamp(file)
+    file = File.expand_path(file)
+    if @file_timestamp[file].nil?
+        @file_timestamp[file] = File.mtime(file)
     end
-    return !File.exists?(object_filename) || File.ctime(object_filename) < File.mtime(source_filename)
+    @file_timestamp[file]
+end
+
+def should_build(source_filename, object_filename, dependency_filename)
+    result = !File.exists?(object_filename)
+    object_timestamp = nil
+    if !result
+        object_timestamp = File.ctime(object_filename)
+        if File.directory?(object_filename)
+            FileUtils.rm_r(object_filename)
+        end
+        result = object_timestamp < file_timestamp(source_filename) || !File.exists?(dependency_filename)
+    end
+    if !result
+        File.open(dependency_filename, 'r') { |f|
+            while line = f.gets
+                line.strip!
+                result = object_timestamp < file_timestamp(line)
+                if result
+                    break
+                end
+            end
+        }
+    end
+    result
 end
 
 def build_directory(source_dir, build_dir, compilers, object_files)
@@ -46,7 +73,7 @@ def build_directory(source_dir, build_dir, compilers, object_files)
     Dir.foreach(source_dir) { |element|
         next if element == "." || element == ".."
         if File.directory?(source_dir + "/" + element)
-            compiled ||= build_directory(source_dir + "/" + element, build_dir, compilers, object_files)
+            compiled = build_directory(source_dir + "/" + element, build_dir, compilers, object_files) || compiled
         else
             object_filename = nil
             compiler = nil
@@ -54,14 +81,14 @@ def build_directory(source_dir, build_dir, compilers, object_files)
                 when ".cpp"
                     object_filename = File.basename(element, ".cpp") + ".o"
                     dependency_filename = File.basename(element, ".cpp") + ".dependency-header"
-                    if should_build(source_dir + "/" + element, build_dir + "/" + object_filename, dependency_filename)
+                    if should_build(source_dir + "/" + element, build_dir + "/" + object_filename, build_dir + "/" + dependency_filename)
                         compiler = [ compilers[".cpp"][:command], source_dir + "/" + element, "-o", build_dir + "/" + object_filename, "-c", *compilers[".cpp"][:parameters] ]
                         dependency = [ compilers[".cpp"][:command], source_dir + "/" + element, "-o", build_dir + "/" + dependency_filename, "-E", *compilers[".cpp"][:parameters] ]
                     end
                 when ".c"
                     object_filename = File.basename(element, ".c") + ".o"
                     dependency_filename = File.basename(element, ".c") + ".dependency-header"
-                    if should_build(source_dir + "/" + element, build_dir + "/" + object_filename, dependency_filename)
+                    if should_build(source_dir + "/" + element, build_dir + "/" + object_filename, build_dir + "/" + dependency_filename)
                         compiler = [ compilers[".c"][:command], source_dir + "/" + element, "-o", build_dir + "/" + object_filename, "-c", *compilers[".c"][:parameters] ]
                         dependency = [ compilers[".c"][:command], source_dir + "/" + element, "-o", build_dir + "/" + dependency_filename, "-E", *compilers[".c"][:parameters] ]
                     end
@@ -78,7 +105,7 @@ def build_directory(source_dir, build_dir, compilers, object_files)
                             line.strip!
                             if line =~ /^# *[0-9]* "(.*)" *[0-9]*$/
                                 if $1 != "<command-line>" && $1 != "<built-in>"
-                                    header_hash[$1] = true
+                                    header_hash[File.expand_path($1)] = true
                                 end
                             end
                         end

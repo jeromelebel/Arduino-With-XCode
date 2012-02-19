@@ -31,7 +31,7 @@ def load_hardware_info(info_filename, board_name)
     result
 end
 
-def should_build(source_filename, object_filename)
+def should_build(source_filename, object_filename, dependency_filename)
     if File.directory?(object_filename)
         FileUtils.rm_r(object_filename)
     end
@@ -53,13 +53,17 @@ def build_directory(source_dir, build_dir, compilers, object_files)
             case File.extname(element)
                 when ".cpp"
                     object_filename = File.basename(element, ".cpp") + ".o"
-                    if should_build(source_dir + "/" + element, build_dir + "/" + object_filename)
-                        compiler = [ compilers[".cpp"][:command], source_dir + "/" + element, "-o", build_dir + "/" + object_filename, *compilers[".cpp"][:parameters] ]
+                    dependency_filename = File.basename(element, ".cpp") + ".dependency-header"
+                    if should_build(source_dir + "/" + element, build_dir + "/" + object_filename, dependency_filename)
+                        compiler = [ compilers[".cpp"][:command], source_dir + "/" + element, "-o", build_dir + "/" + object_filename, "-c", *compilers[".cpp"][:parameters] ]
+                        dependency = [ compilers[".cpp"][:command], source_dir + "/" + element, "-o", build_dir + "/" + dependency_filename, "-E", *compilers[".cpp"][:parameters] ]
                     end
                 when ".c"
                     object_filename = File.basename(element, ".c") + ".o"
-                    if should_build(source_dir + "/" + element, build_dir + "/" + object_filename)
-                        compiler = [ compilers[".c"][:command], source_dir + "/" + element, "-o", build_dir + "/" + object_filename, *compilers[".c"][:parameters] ]
+                    dependency_filename = File.basename(element, ".c") + ".dependency-header"
+                    if should_build(source_dir + "/" + element, build_dir + "/" + object_filename, dependency_filename)
+                        compiler = [ compilers[".c"][:command], source_dir + "/" + element, "-o", build_dir + "/" + object_filename, "-c", *compilers[".c"][:parameters] ]
+                        dependency = [ compilers[".c"][:command], source_dir + "/" + element, "-o", build_dir + "/" + dependency_filename, "-E", *compilers[".c"][:parameters] ]
                     end
             end
             if !object_filename.nil?
@@ -67,6 +71,23 @@ def build_directory(source_dir, build_dir, compilers, object_files)
                 if !compiler.nil?
                     compiled = true
                     execute(compiler)
+                    system(*dependency)
+                    header_hash = {}
+                    File.open(build_dir + "/" + dependency_filename, 'r') { |f|
+                        while line = f.gets
+                            line.strip!
+                            if line =~ /^# *[0-9]* "(.*)" *[0-9]*$/
+                                if $1 != "<command-line>" && $1 != "<built-in>"
+                                    header_hash[$1] = true
+                                end
+                            end
+                        end
+                    }
+                    File.open(build_dir + "/" + dependency_filename, 'w') { |f|
+                        header_hash.each { |filename, notused|
+                            f.puts(filename)
+                        }
+                    }
                 end
             end
         end
@@ -139,8 +160,8 @@ hardware_variant_path = ENV['HARDWARE_PATH'] + "/variants/" + hardware_info["bui
 hardware_core_path = ENV['HARDWARE_PATH'] + "/cores/" + hardware_info["build.core"]
 
 compilers = {}
-compilers[".c"] = { :command => avr_dir + "/avr-gcc", :parameters => [ "-c", "-mmcu=" + hardware_info["build.mcu"], "-DF_CPU=" + hardware_info["build.f_cpu"], "-DARDUINO=100", "-DSPEEDRATE=" + hardware_info["upload.speed"], "-Os", "-funsigned-char", "-funsigned-bitfields", "-fpack-struct", "-fshort-enums", "-ffunction-sections", "-fdata-sections", "-Wl,-gc-sections", "-gstabs", "-Wall", "-Wstrict-prototypes", "-std=gnu99", "-I" + hardware_variant_path, "-I" + hardware_core_path ] }
-compilers[".cpp"] = { :command => avr_dir + "/avr-gcc", :parameters => [ "-c", "-mmcu=" + hardware_info["build.mcu"], "-DF_CPU=" + hardware_info["build.f_cpu"], "-DARDUINO=100", "-DSPEEDRATE=" + hardware_info["upload.speed"], "-Os", "-funsigned-char", "-funsigned-bitfields", "-fpack-struct", "-fshort-enums", "-ffunction-sections", "-fdata-sections", "-Wl,-gc-sections", "-I" + hardware_variant_path, "-I" + hardware_core_path  ] }
+compilers[".c"] = { :command => avr_dir + "/avr-gcc", :parameters => [ "-mmcu=" + hardware_info["build.mcu"], "-DF_CPU=" + hardware_info["build.f_cpu"], "-DARDUINO=100", "-DSPEEDRATE=" + hardware_info["upload.speed"], "-Os", "-funsigned-char", "-funsigned-bitfields", "-fpack-struct", "-fshort-enums", "-ffunction-sections", "-fdata-sections", "-Wl,-gc-sections", "-gstabs", "-Wall", "-Wstrict-prototypes", "-std=gnu99", "-I" + hardware_variant_path, "-I" + hardware_core_path ] }
+compilers[".cpp"] = { :command => avr_dir + "/avr-gcc", :parameters => [ "-mmcu=" + hardware_info["build.mcu"], "-DF_CPU=" + hardware_info["build.f_cpu"], "-DARDUINO=100", "-DSPEEDRATE=" + hardware_info["upload.speed"], "-Os", "-funsigned-char", "-funsigned-bitfields", "-fpack-struct", "-fshort-enums", "-ffunction-sections", "-fdata-sections", "-Wl,-gc-sections", "-I" + hardware_variant_path, "-I" + hardware_core_path  ] }
 compilers["archiver"] = { :command => avr_dir + "/avr-ar", :parameters => [ "rcs" ] }
 compilers["linker"] = { :command => avr_dir + "/avr-gcc", :parameters => [ "-mmcu=" + hardware_info["build.mcu"], "-DF_CPU=" + hardware_info["build.f_cpu"], "-DARDUINO=100", "-DSPEEDRATE=" + hardware_info["upload.speed"], "-Os", "-funsigned-char", "-funsigned-bitfields", "-fpack-struct", "-fshort-enums", "-ffunction-sections", "-fdata-sections", "-Wl,-gc-sections", "-gstabs", "-Wall", "-Wstrict-prototypes", "-std=gnu99", "-lm", "-o", ENV['BUILD_DIR'] + "/" + ENV['PRODUCT_NAME'] + ".elf" ] }
 compilers["objcopy"] = { :command => avr_dir + "/avr-objcopy", :parameters => [ "-O", "ihex", "-R", ".eeprom", ENV['BUILD_DIR'] + "/" + ENV['PRODUCT_NAME'] + ".elf", ENV['BUILD_DIR'] + "/" + ENV['PRODUCT_NAME'] + ".hex" ] }

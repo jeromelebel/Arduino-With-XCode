@@ -152,6 +152,7 @@ folder:
 
 # Program the device.  
 upload: $(BUILD_DIR)/$(TARGET).hex
+	-screen -X kill
 	$(AVRDUDE) -C$(AVRDUDE_CONF) $(AVRDUDE_FLAGS) $(AVRDUDE_WRITE_FLASH)
 
 # Display size of file.

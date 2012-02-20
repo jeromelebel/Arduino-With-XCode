@@ -65,7 +65,7 @@ def should_build(source_filename, object_filename, dependency_filename)
     result
 end
 
-def build_directory(source_dir, build_dir, compilers, object_files)
+def build_directory(source_dir, build_dir, compilers, object_files, recursive)
     compiled = false
     if !File.directory?(build_dir)
         Dir.mkdir(build_dir)
@@ -73,7 +73,9 @@ def build_directory(source_dir, build_dir, compilers, object_files)
     Dir.foreach(source_dir) { |element|
         next if element == "." || element == ".."
         if File.directory?(source_dir + "/" + element)
-            compiled = build_directory(source_dir + "/" + element, build_dir, compilers, object_files) || compiled
+            if recursive
+                compiled = build_directory(source_dir + "/" + element, build_dir, compilers, object_files, recursive) || compiled
+            end
         else
             object_filename = nil
             compiler = nil
@@ -142,7 +144,7 @@ def build(build_dir, sources, compilers)
     archive_files = []
     sources.each { |source|
         source[:object_files] = []
-        compiled = build_directory(source[:source_dir], source[:build_dir], compilers, source[:object_files])
+        compiled = build_directory(source[:source_dir], source[:build_dir], compilers, source[:object_files], source[:recursive])
         if compiled || !File.exists?(source[:archive_file])
             if File.exists?(source[:archive_file])
                 File.unlink(source[:archive_file])
@@ -180,6 +182,16 @@ def clean(build_dir)
     end
 end
 
+def add_header_path(compiler, source_dir, recursive)
+    compiler[:parameters] << "-I" + source_dir
+    if recursive
+        Dir.foreach(source_dir) { |element|
+            next if element == "." || element == ".." || !File.directory?(source_dir + "/" + element)
+            add_header_path(compiler, source_dir + "/" + element, recursive)
+        }
+    end
+end
+
 hardware_info = load_hardware_info(ENV['BOARDS_TXT_PATH'], ENV['BOARD_NAME'])
 avr_dir = ENV['ARDUINO_APP_PATH'] + "/Contents/Resources/Java/hardware/tools/avr/bin"
 avr_dude_file = ENV['ARDUINO_APP_PATH'] + "/Contents/Resources/Java/hardware/tools/avr/etc/avrdude.conf"
@@ -193,12 +205,15 @@ compilers["archiver"] = { :command => avr_dir + "/avr-ar", :parameters => [ "rcs
 compilers["linker"] = { :command => avr_dir + "/avr-gcc", :parameters => [ "-mmcu=" + hardware_info["build.mcu"], "-DF_CPU=" + hardware_info["build.f_cpu"], "-DARDUINO=100", "-DSPEEDRATE=" + hardware_info["upload.speed"], "-Os", "-funsigned-char", "-funsigned-bitfields", "-fpack-struct", "-fshort-enums", "-ffunction-sections", "-fdata-sections", "-Wl,-gc-sections", "-gstabs", "-Wall", "-Wstrict-prototypes", "-std=gnu99", "-lm", "-o", ENV['BUILD_DIR'] + "/" + ENV['PRODUCT_NAME'] + ".elf" ] }
 compilers["objcopy"] = { :command => avr_dir + "/avr-objcopy", :parameters => [ "-O", "ihex", "-R", ".eeprom", ENV['BUILD_DIR'] + "/" + ENV['PRODUCT_NAME'] + ".elf", ENV['BUILD_DIR'] + "/" + ENV['PRODUCT_NAME'] + ".hex" ] }
 
-sources = [ { :source_dir => ENV['PROJECT_DIR'], :build_dir => ENV['BUILD_DIR'] + "/project", :archive_file => ENV['BUILD_DIR'] + "/project/project.a", :name => "project" }, { :source_dir => hardware_core_path, :build_dir => ENV['BUILD_DIR'] + "/core", :archive_file => ENV['BUILD_DIR'] + "/core/core.a", :name => "core" } ]
+sources = [ { :source_dir => ENV['PROJECT_DIR'], :build_dir => ENV['BUILD_DIR'] + "/project", :archive_file => ENV['BUILD_DIR'] + "/project/project.a", :name => "project", :recursive => true }, { :source_dir => hardware_core_path, :build_dir => ENV['BUILD_DIR'] + "/core", :archive_file => ENV['BUILD_DIR'] + "/core/core.a", :name => "core", :recursive => false } ]
 ENV['HARDWARE_LIBRARIES'].split(" ").each { |library|
     library_name = library.split("/").join("_")
-    sources << { :source_dir => ENV['HARDWARE_LIBRARY_DIR'] + "/" + library, :build_dir => ENV['BUILD_DIR'] + "/lib_" + library_name, :archive_file => ENV['BUILD_DIR'] + "/lib_" + library_name + "/lib_" + library_name + ".a", :name => "lib_" + library }
-    compilers[".c"][:parameters] << "-I" + ENV['HARDWARE_LIBRARY_DIR'] + "/" + library
-    compilers[".cpp"][:parameters] << "-I" + ENV['HARDWARE_LIBRARY_DIR'] + "/" + library
+    sources << { :source_dir => ENV['HARDWARE_LIBRARY_DIR'] + "/" + library, :build_dir => ENV['BUILD_DIR'] + "/lib_" + library_name, :archive_file => ENV['BUILD_DIR'] + "/lib_" + library_name + "/lib_" + library_name + ".a", :name => "lib_" + library, :recursive => false }
+}
+
+sources.each { |source|
+    add_header_path(compilers[".c"], source[:source_dir], source[:recursive])
+    add_header_path(compilers[".cpp"], source[:source_dir], source[:recursive])
 }
 
 if ARGV.count > 0 && ARGV[0] == "clean"

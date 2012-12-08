@@ -1,11 +1,7 @@
 #ifndef _ARDUINO_PROGRAM_H
 #define _ARDUINO_PROGRAM_H
 
-#if ARDUINO == 100
 #include <Arduino.h>
-#else
-#include <WProgram.h>
-#endif
 
 /********************************************
  LIBRARIES

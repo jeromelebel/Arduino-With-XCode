@@ -184,6 +184,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				ARDUINO_APP_PATH = /Applications/Arduino.app;
+				AVR_BIN_PATH = $ARDUINO_APP_PATH/Contents/Resources/Java/hardware/tools/avr/bin;
 				BOARDS_TXT_PATH = "$(HARDWARE_PATH)/boards.txt";
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
@@ -204,6 +205,7 @@
 		19A5FF1014757BAC00FAEAAB /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				PORT = "/dev/tty.usbserial*";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;

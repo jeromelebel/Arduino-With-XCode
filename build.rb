@@ -81,16 +81,16 @@ def build_directory(source_dir, build_dir, compilers, object_files, recursive)
             compiler = nil
             case File.extname(element)
                 when ".cpp"
-                    puts element + " " + File.extname(element) + " cpp"
-                    object_filename = File.basename(element, ".cpp") + ".o"
+                    puts element + " " + File.basename(element, ".cpp") + " x"
+                    object_filename = File.basename(element) + ".o"
                     dependency_filename = File.basename(element, ".cpp") + ".dependency-header"
                     if should_build(source_dir + "/" + element, build_dir + "/" + object_filename, build_dir + "/" + dependency_filename)
                         compiler = [ compilers[".cpp"][:command], source_dir + "/" + element, "-o", build_dir + "/" + object_filename, "-c", *compilers[".cpp"][:parameters] ]
                         dependency = [ compilers[".cpp"][:command], source_dir + "/" + element, "-o", build_dir + "/" + dependency_filename, "-E", *compilers[".cpp"][:parameters] ]
                     end
                 when ".c"
-                puts element + " " + File.extname(element) + " c"
-                    object_filename = File.basename(element, ".c") + ".o"
+                puts element + " " + File.basename(element, ".c") + " x"
+                    object_filename = File.basename(element) + ".o"
                     dependency_filename = File.basename(element, ".c") + ".dependency-header"
                     if should_build(source_dir + "/" + element, build_dir + "/" + object_filename, build_dir + "/" + dependency_filename)
                         compiler = [ compilers[".c"][:command], source_dir + "/" + element, "-o", build_dir + "/" + object_filename, "-c", *compilers[".c"][:parameters] ]
@@ -165,11 +165,10 @@ def build(build_dir, sources, compilers)
             archive_files << source[:archive_file]
         end
     }
-    puts "--- linker ---"
     parameters = [ compilers["linker"][:command] ]
     parameters.push(*compilers["linker"][:parameters])
-    parameters.push(*archive_files)
     parameters.push(*project_object_files)
+    parameters.push(*archive_files)
     execute(parameters)
     
     parameters = [ compilers["objcopy"][:command] ]
@@ -200,6 +199,7 @@ avr_dir = ENV['AVR_BIN_PATH']
 hardware_variant_path = ENV['HARDWARE_PATH'] + "/variants/" + hardware_info["build.variant"]
 hardware_core_path = ENV['HARDWARE_PATH'] + "/cores/" + hardware_info["build.core"]
 arduino_version = "101"
+source_dir = ENV['SOURCE_DIR']
 
 compilers = {}
 compilers[".c"] = {
@@ -242,7 +242,7 @@ compilers["linker"] = {
     :command => avr_dir + "/avr-gcc",
     :parameters => [
         "-Os",
-        "-Wl,-gc-sections,--relax",
+        "-Wl,--gc-sections,--relax",
         "-mmcu=" + hardware_info["build.mcu"],
         "-lm",
         "-o",
@@ -250,7 +250,7 @@ compilers["linker"] = {
 compilers["objcopy"] = { :command => avr_dir + "/avr-objcopy", :parameters => [ "-O", "ihex", "-R", ".eeprom", ENV['BUILD_DIR'] + "/" + ENV['PRODUCT_NAME'] + ".elf", ENV['BUILD_DIR'] + "/" + ENV['PRODUCT_NAME'] + ".hex" ] }
 
 sources = [
-    { :source_dir => ENV['PROJECT_DIR'], :build_dir => ENV['BUILD_DIR'] + "/project", :archive_file => ENV['BUILD_DIR'] + "/project/project.a", :name => "project", :recursive => true },
+    { :source_dir => source_dir, :build_dir => ENV['BUILD_DIR'] + "/project", :archive_file => ENV['BUILD_DIR'] + "/project/project.a", :name => "project", :recursive => true },
     { :source_dir => hardware_core_path, :build_dir => ENV['BUILD_DIR'] + "/core", :archive_file => ENV['BUILD_DIR'] + "/core/core.a", :name => "core", :recursive => false }
 ]
 ENV['HARDWARE_LIBRARIES'].split(" ").each { |library|

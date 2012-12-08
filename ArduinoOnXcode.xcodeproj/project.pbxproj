@@ -199,6 +199,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				PORT = "/dev/tty.usbmodem*";
 				SDKROOT = macosx;
+				SOURCE_DIR = "${PROJECT_DIR}/src";
 			};
 			name = Release;
 		};

@@ -73,7 +73,7 @@
             isEnabled = "YES">
          </CommandLineArgument>
          <CommandLineArgument
-            argument = "${BUILD_DIR}"
+            argument = "${BUILD_DIR}/src"
             isEnabled = "YES">
          </CommandLineArgument>
          <CommandLineArgument

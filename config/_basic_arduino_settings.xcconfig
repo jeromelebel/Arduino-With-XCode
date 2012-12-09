@@ -3,4 +3,4 @@
 ARDUINO_VERSION = 100
 HARDWARE_NAME = arduino
 HARDWARE_LIBRARY_DIR = ${ARDUINO_APP_PATH}/Contents/Resources/Java/libraries
-HARDWARE_LIBRARIES = Wire Wire/utility EEPROM Ethernet Ethernet/utility  SPI Firmata LiquidCrystal SD SD/utility Servo SoftwareSerial Stepper 
+HARDWARE_LIBRARIES = Wire,Wire/utility,EEPROM,Ethernet,Ethernet/utility,SPI,Firmata,LiquidCrystal,SD,SD/utility,Servo,SoftwareSerial,Stepper

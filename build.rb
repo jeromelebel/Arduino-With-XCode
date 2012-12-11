@@ -11,9 +11,12 @@ require 'pp'
 #puts ENV.keys.inspect
 
 @file_timestamp = {}
+@verbose = false
 
 def execute(parameters)
-    #puts parameters.join(" ")
+    if @verbose
+        puts parameters.join(" ")
+    end
     system *parameters
 end
 
@@ -100,19 +103,16 @@ def build_directory(source_dir, build_dir, compilers, object_files, recursive)
                     compiled &&= execute(compiler)
                     system(*dependency)
                     header_hash = {}
-                    begin
-                        File.open(build_dir + "/" + dependency_filename, 'r') { |f|
-                            while line = f.gets
-                                line.strip!
-                                if line =~ /^# *[0-9]* "(.*)" *[0-9]*$/
-                                    if $1 != "<command-line>" && $1 != "<built-in>"
-                                        header_hash[File.expand_path($1)] = true
-                                    end
+                    File.open(build_dir + "/" + dependency_filename, 'r') { |f|
+                        while line = f.gets
+                            line.strip!
+                            if line =~ /^# *[0-9]* "(.*)" *[0-9]*$/
+                                if $1 != "<command-line>" && $1 != "<built-in>"
+                                    header_hash[File.expand_path($1)] = true
                                 end
                             end
-                        }
-                        rescue
-                    end
+                        end
+                    }
                     File.open(build_dir + "/" + dependency_filename, 'w') { |f|
                         header_hash.each { |filename, notused|
                             f.puts(filename)
@@ -174,6 +174,7 @@ def build(build_dir, sources, compilers)
         end
     }
     if success
+        puts "Creating " + compilers["linker"][:parameters][compilers["linker"][:parameters].count - 1]
         parameters = [ compilers["linker"][:command] ]
         parameters.push(*compilers["linker"][:parameters])
         parameters.push(*project_object_files)
@@ -182,6 +183,7 @@ def build(build_dir, sources, compilers)
     end
     
     if success
+        puts "Creating " + compilers["objcopy"][:parameters][compilers["objcopy"][:parameters].count - 1]
         parameters = [ compilers["objcopy"][:command] ]
         parameters.push(*compilers["objcopy"][:parameters])
         success &&= execute(parameters)
@@ -216,6 +218,8 @@ build_path = ENV['BUILD_DIR']
 project_name = ENV['PRODUCT_NAME']
 if !ENV['HARDWARE_LIBRARIES'].nil? && ENV['HARDWARE_LIBRARIES'].length > 0
     libraries = ENV['HARDWARE_LIBRARIES'].split(",")
+    else
+    libraries = []
 end
 library_path = ENV['HARDWARE_LIBRARY_DIR']
 
@@ -244,12 +248,19 @@ op = OptionParser.new do |opts|
     opts.on("--library-path <path>", String, "set the library directory") { |path|
         library_path = path
     }
+    opts.on("--verbose", "set the library directory") {
+        @verbose = true
+    }
 end
 
 op.parse!(ARGV)
 
 if ARGV.length > 0
     source_dir = ARGV[0]
+end
+
+if project_name.nil? || project_name.length == 0 then
+    project_name = File.basename(File.expand_path(source_dir))
 end
 
 if avr_path.nil?
@@ -261,6 +272,12 @@ end
 hardware_info = load_hardware_info(hardware_path + "/boards.txt", board_name)
 hardware_variant_path = hardware_path + "/variants/" + hardware_info["build.variant"]
 hardware_core_path = hardware_path + "/cores/" + hardware_info["build.core"]
+
+if build_path.nil? || build_path.length == 0 then
+    build_path = source_dir + "/" + "build"
+    else
+    build_path = build_path + "/" + project_name
+end
 
 compilers = {}
 compilers[".c"] = {

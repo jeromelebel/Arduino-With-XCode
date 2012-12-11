@@ -85,7 +85,9 @@
 				22FCDCB414C8F1830033ABF6 /* Products */,
 				02869DD214D1F1AB00D5DD37 /* upload-run.sh */,
 			);
+			indentWidth = 4;
 			sourceTree = "<group>";
+			tabWidth = 4;
 		};
 		19A5FEEE1475790300FAEAAB /* config */ = {
 			isa = PBXGroup;

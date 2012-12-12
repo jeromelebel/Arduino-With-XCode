@@ -209,44 +209,48 @@ def add_header_path(compiler, source_dir, recursive)
     end
 end
 
-hardware_path = ENV['HARDWARE_PATH']
-board_name = ENV['BOARD_NAME']
-avr_path = ENV['AVR_BIN_PATH']
-arduino_version = ENV['ARDUINO_VERSION']
-source_dir = ENV['SOURCE_DIR']
-build_path = ENV['BUILD_DIR']
-project_name = ENV['PRODUCT_NAME']
+environment = { "optimisation" => "-Os",
+    "hardware_path" => ENV['HARDWARE_PATH'],
+    "board_name" => ENV['BOARD_NAME'],
+    "avr_path" => ENV['AVR_BIN_PATH'],
+    "arduino_version" => ENV['ARDUINO_VERSION'],
+    "source_dir" => ENV['SOURCE_DIR'],
+    "build_path" => ENV['BUILD_DIR'],
+    "project_name" => ENV['PRODUCT_NAME'] }
 if !ENV['HARDWARE_LIBRARIES'].nil? && ENV['HARDWARE_LIBRARIES'].length > 0
-    libraries = ENV['HARDWARE_LIBRARIES'].split(",")
+    environment["libraries"] = ENV['HARDWARE_LIBRARIES'].split(",")
     else
-    libraries = []
+    environment["libraries"] = []
 end
-library_path = ENV['HARDWARE_LIBRARY_DIR']
+environment["library_path"] = ENV['HARDWARE_LIBRARY_DIR']
 
 op = OptionParser.new do |opts|
     opts.on("--hardware-path <path>", String, "set the hardware path") { |path|
-        hardware_path = path
+        environment["hardware_path"] = path
     }
     opts.on("-b", "--board-name <name>", String, "set the board name") { |name|
-        board_name = name
+        environment["board_name"] = name
     }
     opts.on("-a", "--avr-path <path>", String, "set the avr path") { |path|
-        avr_path = path
+        environment["avr_path"] = path
     }
     opts.on("-v", "--arduino-version <version>", String, "set the arduino version") { |version|
-        arduino_version = version
+        environment["arduino_version"] = version
     }
     opts.on("--build-path <path>", String, "set the build directory") { |path|
-        build_path = path
+        environment["build_path"] = path
     }
     opts.on("-p", "--product-name <name>", String, "set the build directory") { |name|
-        project_name = name
+        environment["project_name"] = name
     }
     opts.on("-l", "--libraries a,b,c", Array, "enabled libraries") { | library_array|
-        libraries = library_array
+        environment["libraries"] = library_array
     }
     opts.on("--library-path <path>", String, "set the library directory") { |path|
-        library_path = path
+        environment["library_path"] = path
+    }
+    opts.on("--optimisation [0, 1, 2, 3, s]", String, "set the compiler optimisation") { |string|
+        environment["optimisation"] = "-O" + string
     }
     opts.on("--verbose", "set the library directory") {
         @verbose = true
@@ -256,84 +260,84 @@ end
 op.parse!(ARGV)
 
 if ARGV.length > 0
-    source_dir = ARGV[0]
+    environment["source_dir"] = ARGV[0]
 end
 
-if project_name.nil? || project_name.length == 0 then
-    project_name = File.basename(File.expand_path(source_dir))
+if environment["project_name"].nil? || environment["project_name"].length == 0 then
+    environment["project_name"] = File.basename(File.expand_path(environment["source_dir"]))
 end
 
-if avr_path.nil?
-    avr_path = ""
+if environment["avr_path"].nil?
+    environment["avr_path"] = ""
 end
-if avr_path.length > 0 && avr_path[-1, 1] != "/" then
-    avr_path = avr_path + "/"
+if environment["avr_path"].length > 0 && environment["avr_path"][-1, 1] != "/" then
+    environment["avr_path"] = environment["avr_path"] + "/"
 end
-hardware_info = load_hardware_info(hardware_path + "/boards.txt", board_name)
-hardware_variant_path = hardware_path + "/variants/" + hardware_info["build.variant"]
-hardware_core_path = hardware_path + "/cores/" + hardware_info["build.core"]
+environment["hardware_info"] = load_hardware_info(environment["hardware_path"] + "/boards.txt", environment["board_name"])
+environment["hardware_variant_path"] = environment["hardware_path"] + "/variants/" + environment["hardware_info"]["build.variant"]
+environment["hardware_core_path"] = environment["hardware_path"] + "/cores/" + environment["hardware_info"]["build.core"]
 
-if build_path.nil? || build_path.length == 0 then
-    build_path = source_dir + "/" + "build"
+if environment["build_path"].nil? || environment["build_path"].length == 0 then
+    environment["build_path"] = environment["source_dir"] + "/" + "build"
     else
-    build_path = build_path + "/" + project_name
+    environment["build_path"] = environment["build_path"] + "/" + environment["project_name"]
 end
 
 compilers = {}
 compilers[".c"] = {
-    :command => avr_path + "avr-gcc",
+    :command => environment["avr_path"] + "avr-gcc",
     :parameters => [
     "-c",
     "-g",
-    "-Os",
+    environment["optimisation"],
     "-w",
     "-ffunction-sections",
     "-fdata-sections",
-    "-mmcu=" + hardware_info["build.mcu"],
-    "-DF_CPU=" + hardware_info["build.f_cpu"],
+    "-mmcu=" + environment["hardware_info"]["build.mcu"],
+    "-DF_CPU=" + environment["hardware_info"]["build.f_cpu"],
     "-MMD",
     "-DUSB_PID=null",
-    "-DARDUINO=" + arduino_version,
-    "-I" + hardware_variant_path,
-    "-I" + hardware_core_path ] }
+    "-DARDUINO=" + environment["arduino_version"],
+    "-I" + environment["hardware_variant_path"],
+    "-I" + environment["hardware_core_path"] ] }
 compilers[".cpp"] = {
-    :command => avr_path + "avr-g++",
+    :command => environment["avr_path"] + "avr-g++",
     :parameters => [
     "-c",
     "-g",
-    "-Os",
+    environment["optimisation"],
     "-w",
     "-fno-exceptions",
     "-ffunction-sections",
     "-fdata-sections",
-    "-mmcu=" + hardware_info["build.mcu"],
-    "-DF_CPU=" + hardware_info["build.f_cpu"],
+    "-mmcu=" + environment["hardware_info"]["build.mcu"],
+    "-DF_CPU=" + environment["hardware_info"]["build.f_cpu"],
     "-MMD",
     "-DUSB_VID=null",
     "-DUSB_PID=null",
-    "-DARDUINO=" + arduino_version,
-    "-DSPEEDRATE=" + hardware_info["upload.speed"],
-    "-I" + hardware_variant_path,
-    "-I" + hardware_core_path  ] }
-compilers["archiver"] = { :command => avr_path + "avr-ar", :parameters => [ "rcs" ] }
+    "-DARDUINO=" + environment["arduino_version"],
+    "-DSPEEDRATE=" + environment["hardware_info"]["upload.speed"],
+    "-I" + environment["hardware_variant_path"],
+    "-I" + environment["hardware_core_path"]  ] }
+compilers["archiver"] = { :command => environment["avr_path"] + "avr-ar", :parameters => [ "rcs" ] }
 compilers["linker"] = {
-    :command => avr_path + "avr-gcc",
+    :command => environment["avr_path"] + "avr-gcc",
     :parameters => [
-    "-Os",
+    environment["optimisation"],
     "-Wl,--gc-sections,--relax",
-    "-mmcu=" + hardware_info["build.mcu"],
+    "-mmcu=" + environment["hardware_info"]["build.mcu"],
     "-lm",
     "-o",
-    build_path + "/" + project_name + ".elf" ] }
-compilers["objcopy"] = { :command => avr_path + "avr-objcopy", :parameters => [ "-O", "ihex", "-R", ".eeprom", build_path + "/" + project_name + ".elf", build_path + "/" + project_name + ".hex" ] }
+    environment["build_path"] + "/" + environment["project_name"] + ".elf" ] }
+compilers["objcopy"] = { :command => environment["avr_path"] + "avr-objcopy", :parameters => [ "-O", "ihex", "-R", ".eeprom", environment["build_path"] + "/" + environment["project_name"] + ".elf", environment["build_path"] + "/" + environment["project_name"] + ".hex" ] }
 
 sources = [
-{ :source_dir => source_dir, :build_dir => build_path + "/project", :archive_file => build_path + "/project/project.a", :name => "project", :recursive => true },
-{ :source_dir => hardware_core_path, :build_dir => build_path + "/core", :archive_file => build_path + "/core/core.a", :name => "core", :recursive => false }
+{ :source_dir => environment["source_dir"], :build_dir => environment["build_path"] + "/project", :archive_file => environment["build_path"] + "/project/project.a", :name => "project", :recursive => true },
+{ :source_dir => environment["hardware_core_path"], :build_dir => environment["build_path"] + "/core", :archive_file => environment["build_path"] + "/core/core.a", :name => "core", :recursive => false }
 ]
-libraries.each { |library|
+environment["libraries"].each { |library|
     library_name = library.split("/").join("_")
-    sources << { :source_dir => library_path + "/" + library, :build_dir => build_path + "/lib_" + library_name, :archive_file => build_path + "/lib_" + library_name + "/lib_" + library_name + ".a", :name => "lib_" + library, :recursive => false }
+    sources << { :source_dir => environment["library_path"] + "/" + library, :build_dir => environment["build_path"] + "/lib_" + library_name, :archive_file => environment["build_path"] + "/lib_" + library_name + "/lib_" + library_name + ".a", :name => "lib_" + library, :recursive => false }
 }
 
 sources.each { |source|
@@ -342,9 +346,9 @@ sources.each { |source|
 }
 
 if ARGV.count > 0 && ARGV[0] == "clean"
-    success = clean(build_path)
+    success = clean(environment["build_path"])
     else
-    success = build(build_path, sources, compilers)
+    success = build(environment["build_path"], sources, compilers)
 end
 if success
     exit(0)
